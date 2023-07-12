@@ -1,0 +1,190 @@
+.welcome{
+  /*background-image: url('./../../assets/Imagenes/homeweb/imagen1.png');*/
+  background-image: url('./../assets/Imagenes/homeweb/imagen1.png');
+  background-size:cover;
+  width: 100%;
+  height: 700px;
+}
+
+
+.welcome #comunity{
+  margin-top: 15%;
+  margin-left: 50%;
+}
+
+.whatis{
+  background-color: rgb(80, 75, 75);
+  color: white;
+}
+
+.whatis #what{
+  width: 60%;
+  text-align: center;
+}
+
+#valores{
+  width: 60%;
+  margin-top: 3%;
+  align-items: center;
+  padding-bottom: 3%;
+}
+
+#valores .row .col-md-4{
+  margin-top: 3%;
+  text-align: left center;
+  align-content: center;
+}
+
+#valores .row .col-md-2{
+  align-items: center;
+}
+
+.cursos{
+  padding-top: 50px;
+}
+
+.valor{
+  width: 100%;
+}
+
+.cursos .container .container-sm {
+  text-align: center;
+}
+
+.cards .container{
+  margin-top: 50px;
+  width: 70%;
+  padding-bottom: 50px;
+  align-items: center;
+}
+
+.cards{
+  width: 100%;
+}
+.card-title{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font: bold;
+}
+
+.card-footer{
+  font-size: small;
+}
+
+.card{
+  height: 100%;
+}
+
+.future{
+  background-image: url('./../assets/Imagenes/homeweb/imagen2.png');
+  background-size:cover;
+  width: 100%;
+  height: 350px;
+}
+
+#ImgFormulario{
+  background-image: url('./../assets/Imagenes/homeweb/foto8.png');
+  background-size:cover;
+  width: 100%;
+  height: 100%;
+}
+
+.proximos{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.proximos .card{
+    height: 200px;
+}
+
+.proximos .card-img-top{
+  height: 200px;
+  width: 200px;
+}
+
+.no-border {
+  border: 0;
+  box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+}
+
+.Formulario input, textarea{
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: gray
+}
+
+#Fields{
+  box-shadow:
+        inset 0px 21px 10px -10px #CCC,
+        inset 0px -11px 10px -10px #CCC;
+}
+
+.Visita{
+  background-color: #CCC;
+}
+
+#imgVisita{
+  background-image: url('./../assets/Imagenes/homeweb/foto9.png');
+  background-size:cover;
+  width: 100%;
+  height: 500px;
+}
+
+.Visita{
+  background-color: #F8F9F9;
+}
+
+#lbSoy{
+  margin-top: 50px;
+  color: #2ECC71;
+  font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+#txtVisita{
+  padding-right: 300px;
+}
+
+#txtVisita2{
+  color: gray;
+  font-size: xx-large;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+#txtVisita3{
+  color: gray;
+  font-size: medium;
+}
+
+#btVisit{
+  background-color: #2ECC71;
+  color: white;
+  width: 150px;
+  height: 40px;
+}
+
+#Testimonio{
+  color: white;
+}
+
+.Testimonio{
+  margin-top: 50px;
+  align-items: center;
+  text-align: center;
+}
+
+.h5Test{
+  color: gray;
+}
+
+.pTestTitle{
+  color: orangered;
+  font-size: 40px;
+  font-weight: bold;
+}
+

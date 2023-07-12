@@ -1,0 +1,37 @@
+#header2{
+  background-image: url("./../../assets/Imagenes/instalaciones/objeto2.png");
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.responsive{
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+
+.active{
+  border-bottom: 2px solid #28a745;
+  transition: ease-in-out .3s;
+
+}
+
+.option{
+  border-bottom: .1px solid blue;
+}
+
+li {
+  cursor: pointer;
+}
+
+.nav .nav-item{
+  margin-top: 10px;
+  /* min-height: 2em;
+  border-style: inset;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 45%; */
+}

@@ -1,0 +1,70 @@
+<app-nav></app-nav>
+<div
+  class="container-fluid text-center"
+  style="
+    background-image: url('../../assets/Imagenes/instalaciones/objeto2.png');
+    color: white;
+  "
+>
+  <div class="pt-5">
+    <p class="pt-4">
+      <em>
+        "Cambia, aunque sea lentamente, por que la dirección es más importante
+        que la velocidad."
+      </em>
+    </p>
+    <h1 class="pb-5">Instalaciones</h1>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <div class="image-container">
+    <img
+      src="../../assets/Imagenes/instalaciones/objeto3.png"
+      width="300"
+      alt=""
+    />
+    <div class="image-text1">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="leon"
+            [routerLink]="['leon']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >León</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="image-text2">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="monterrey"
+            [routerLink]="['monterrey']"
+            routerLinkActive="active"
+            >Monterrey</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="image-text3">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="queretaro"
+            [routerLink]="['queretaro']"
+            routerLinkActive="active"
+            >Querétaro</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

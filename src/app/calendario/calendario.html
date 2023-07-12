@@ -1,0 +1,176 @@
+<!-- Header de la página -->
+<app-nav></app-nav>
+
+<div id="header2">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-0 col-md-2 col-lg-1 col-xl-1"></div>
+      <div class="col-sm-12 col-md-8 col-lg-10 col-xl-10 text-center">
+        <h5 class="fw-lighter">
+          <em>"Cambia, aunque sea lentamente, porque la dirección es más importante que la velocidad". </em>
+        </h5>
+        <h2 class="txtheader2 text-center" id="lbPrograma"><em>Calendario</em></h2>
+      </div>
+      <div class="col-sm-0 col-md-2 col-lg-1 col-xl-1"></div>
+    </div>
+  </div>
+</div>
+
+<div class="dvCalendario">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8" id="dvPcal">
+
+        <div class="row">
+          <!-- Calendario -->
+          <div class="col-sm-4 col-md-6 col-lg-6 col-xl-6">
+            <div class="btn-group">
+              <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                Anterior
+              </div>
+              <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                Hoy
+              </div>
+              <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                Siguiente
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
+            <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+          </div>
+
+          <div [ngSwitch]="view">
+            <mwl-calendar-month-view id="CalView" *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+              [refresh]="refresh" (beforeViewRender)="beforeMonthViewRender($event)">
+            </mwl-calendar-month-view>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+
+        <!-- Pestañas de los Almacenes -->
+        <p class="text-muted">Agrega un filtro:</p>
+
+        <div role="tabpanel">
+          <ul class="nav nav-tab" style="width: 100%;">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center">
+              <li (click)="onTabClick('LEO')" [class.active]="activeTab == 'LEO'" class="tab-link">
+                León
+              </li>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center">
+              <li (click)="onTabClick('MTY')" [class.active]="activeTab == 'MTY'" class="tab-link">
+                Monterrey
+              </li>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center">
+              <li (click)="onTabClick('QRO')" [class.active]="activeTab == 'QRO'" class="tab-link">
+                Querétaro
+              </li>
+            </div>
+
+          </ul>
+
+          <!-- Filtros por cursos -->
+          <div *ngIf="activeTab == 'LEO'" class="w-100">
+            <div class="form-check" *ngFor="let menuList of array11; let i = index">
+              <input (click)="onCursoClick('ck1' + i.toString())" class="form-check-input cks" type="checkbox"
+                [attr.id]="'ck1' + i">
+              <label class="form-check-label" for="flexCheckDefault">{{menuList}}</label>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab == 'MTY'" class="w-100">
+            <div class="form-check" *ngFor="let menuList of array12; let i = index">
+              <input (click)="onCursoClick('ck2' + i.toString())" class="form-check-input cks" type="checkbox"
+                [attr.id]="'ck2' + i">
+              <label class="form-check-label" for="flexCheckDefault">{{menuList}}</label>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab == 'QRO'" class="w-100">
+            <div class="form-check" *ngFor="let menuList of array13; let i = index">
+              <input (click)="onCursoClick('ck3' + i.toString())" class="form-check-input cks" type="checkbox"
+                [attr.id]="'ck3' + i">
+              <label class="form-check-label" for="flexCheckDefault">{{menuList}}</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Panel que muestra la información del curso -->
+<div id="dvCurso" style="margin-top: 20px;">
+
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <h3 id="lbTitulo"></h3>
+    </div>
+    <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <p id="lbDesc"></p>
+
+      <p>PLAN CURRICULAR:</p>
+
+      <p id="lbMaterias"></p>
+
+      <p>REQUISITOS DEL PROGRAMA:</p>
+
+      <p id="lbReq"></p>
+
+      <button type="button" class="btn btn-primary" id="btSolitica"> Quiero
+        Inscribirme
+      </button><br><br>
+
+      <button type="button" class="btn btn-primary" id="btReglamento"> Consultar Política
+      </button>
+    </div>
+
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <p>COSTO DEL PROGRAMA:</p>
+
+      <p id="lbCosto"></p>
+
+      <p>¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
+
+      <p id="lbApoyo"></p>
+
+      <p id="lbDate1"></p>
+
+      <p id="lbDate2"></p>
+
+      <p id="lbTime"></p>
+
+      <!-- <p id="lbCondiciones1">CONDICIONES DE APOYO:</p>
+
+      <p id="lbCondiciones2"></p> -->
+
+      <hr>
+
+      <img id="imgCurso" class="responsive" src="">
+
+    </div>
+  </div>
+</div>
+
+<!-- Enrutamiento y Footer -->
+<router-outlet></router-outlet>
+<app-footer></app-footer>

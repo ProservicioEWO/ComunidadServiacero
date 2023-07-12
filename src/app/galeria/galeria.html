@@ -1,0 +1,63 @@
+<app-nav></app-nav>
+
+<div id="header2">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-0 col-md-2 col-lg-1 col-xl-1"></div>
+      <div class="col-sm-12 col-md-8 col-lg-10 col-xl-10 text-center">
+        <h5 class="fw-lighter">
+          <em>"Cambia, aunque sea lentamente, porque la dirección es más importante que la velocidad". </em>
+        </h5>
+        <h2 class="txtheader2 text-center" id="lbPrograma"><em>Galeria</em></h2>
+      </div>
+      <div class="col-sm-0 col-md-2 col-lg-1 col-xl-1"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 mb-3">
+  <div class="row">
+    <div class="col-md-12" style="height: 100%; background-color: white">
+      <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['prepa']" routerLinkActive="active">Prepa Abierta</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['familia']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Dia de la Familia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['escuela']" routerLinkActive="active">Adopta una escuela</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Campaña de Difusion</a>
+          </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['kickoff']" routerLinkActive="active">Kickoff</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="container" style="margin-top: 50px;">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <h5>¿Qué es Comunidad Serviacero?</h5>
+      <div class="video">
+        <video controls #videoPlayer style="width: 100%; height: auto;">
+          <!-- <source src="https://www.dropbox.com/s/lt32w0y7uotxfhb/ComunidaServiacero_General.mp4?raw=1" -->
+          <source src="./../../assets/Videos/ComunidaServiacero_General.mp4"
+            type="video/mp4" />
+          Browser not supported
+        </video>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<app-footer></app-footer>

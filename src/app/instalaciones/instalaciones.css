@@ -1,0 +1,38 @@
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-text1 {
+  position: absolute;
+  top: 35%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+.image-text2 {
+  position: absolute;
+  top: 35%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+.image-text3 {
+  position: absolute;
+  top: 35%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+
+.nav-link {
+  color: #939393;
+}
+
+.active {
+  color: #1679a2;
+  font-weight: bold;
+}

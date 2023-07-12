@@ -1,0 +1,97 @@
+#header2 {
+  background-image: url("./../../assets/Imagenes/instalaciones/objeto2.png");
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.responsive {
+  width: 90%;
+  max-width: 500px;
+  height: auto;
+  text-align: center;
+}
+
+.active {
+  border-bottom: 2px solid #28a745;
+  transition: ease-in-out 0.3s;
+}
+
+li {
+  cursor: pointer;
+}
+
+.dvCalendario {
+  padding-top: 15px;
+}
+
+.w-100 {
+  margin-top: 20px;
+}
+
+#dvCurso {
+  margin: 50px;
+}
+
+#ck10,
+#ck20,
+#ck30 {
+  background-color: red !important;
+}
+
+#ck11,
+#ck21,
+#ck31 {
+  background-color: green !important;
+}
+
+#ck12,
+#ck22,
+#ck32 {
+  background-color: purple !important;
+}
+
+#ck13,
+#ck23,
+#ck33 {
+  background-color: yellow !important;
+}
+
+#ck14,
+#ck24,
+#ck34 {
+  background-color: cadetblue !important;
+}
+
+#ck15,
+#ck25,
+#ck35 {
+  background-color: blue !important;
+}
+
+#ck16,
+#ck26,
+#ck36 {
+  background-color: orangered !important;
+}
+
+.cal-month-view .bg-pink,
+.cal-week-view .cal-day-columns .bg-pink,
+.cal-day-view .bg-pink {
+  background-color: hotpink !important;
+}
+
+.cal-day-selected,
+.cal-day-selected:hover {
+  background-color: deeppink !important;
+}
+
+.red-cell {
+  background-color: red !important;
+}
+
+.blue-cell {
+  background-color: blue !important;
+}

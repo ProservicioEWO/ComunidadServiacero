@@ -1,0 +1,57 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+@media (max-width: 768px) {
+  #letrero{
+    display: none;
+  }
+}
+
+#form-login-container{
+  max-width: 300px;
+}
+
+#login-wrapper {
+    background-image: url(../../assets/Imagenes/login/fondo-página.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#login-icon{
+  margin: 0 auto;
+}
+
+#login-btn{
+  background-color: blueviolet;
+}
+
+.input-data-login{
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 30px;
+  padding-left: 30px;
+  border:none;
+  border-bottom: 1px solid blueviolet;
+}
+
+.small-text, .input-data-login::placeholder{
+  font-weight: 500;
+  color: black;
+  font-size: 10pt;
+}
+
+input[name="alias"]{
+  background-image: url(../../assets/Imagenes/login/icono-sobre.png);
+}
+
+input[name="password"]{
+  background-image: url(../../assets/Imagenes/login/candado1.png);
+}
+
+app-value{
+  width: 25%;
+}
+
+#login-info-message{
+  font-size: 10pt;
+}

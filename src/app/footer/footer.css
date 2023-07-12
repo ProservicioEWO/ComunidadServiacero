@@ -1,0 +1,103 @@
+.dvLogos {
+  background-color: gray;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.imgLogo {
+  width: 120px;
+  height: 100%;
+}
+
+.imgLogoSer {
+  width: 150px;
+  height: 100%;
+}
+
+.LogoProse {
+  width: 250px;
+  height: 100%;
+}
+
+.link-secondary {
+  margin-top: 20px;
+  font-size: small;
+  text-decoration: none;
+}
+
+#links {
+  margin-top: 10px;
+}
+
+.imgRed {
+  width: 50px;
+  height: 50px;
+}
+
+.dvOfrece {
+  margin-top: 50px;
+  background-image: url("./../../assets/Imagenes/homeweb/imagen2.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.card-body {
+  color: white;
+  text-align: center;
+}
+
+.footerNav {
+  margin-bottom: 10px;
+}
+.footerNav h5 {
+  font-weight: 700;
+  color: #000;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.footerNav .social {
+  text-align: left;
+}
+.footerNav .social i {
+  font-size: 1.25em;
+  color: #b1b1b1;
+  background-color: #efefef;
+  display: inline-block;
+  border-radius: 60px;
+  padding: 0.4em 0.4em;
+  margin-right: 10px;
+  -webkit-transition: all 3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.footerNav .social a:nth-child(1) i {
+  padding: 0.4em 0.55em;
+}
+.footerNav .social a:nth-child(1):hover i {
+  color: #fff;
+  background-color: #4267b2;
+}
+.footerNav .social a:nth-child(2):hover i {
+  color: #fff;
+  background-color: #ca2d8d;
+}
+.footerNav .social a:nth-child(3):hover i {
+  color: #fff;
+  background-color: #0e76a8;
+}
+
+.footerNav .social a:nth-child(4):hover i {
+  color: #fff;
+  background-color: #1da1f2;
+}
+
+.logos-emp img {
+  width: 144%;
+  padding: 0 10px;
+}
+.logos-emp .col {
+  padding: 0 5px;
+}
