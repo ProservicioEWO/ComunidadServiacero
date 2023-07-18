@@ -40,11 +40,11 @@
   font-size: 10pt;
 }
 
-input[name="alias"]{
+#username{
   background-image: url(../../assets/Imagenes/login/icono-sobre.png);
 }
 
-input[name="password"]{
+#password{
   background-image: url(../../assets/Imagenes/login/candado1.png);
 }
 
@@ -54,4 +54,15 @@ app-value{
 
 #login-info-message{
   font-size: 10pt;
+}
+
+.error-label{
+  color: red;
+  font-size: 10pt;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

@@ -6,18 +6,38 @@
           <div class="d-flex justify-content-center">
             <img id="login-icon" src="../../assets/Imagenes/login/icono1.png" width="100" />
           </div>
-          <form>
-            <input class="input-data-login mb-3" type="text" name="alias" [(ngModel)]="user.alias" required
-              placeholder="Usuario" />
-            <input class="input-data-login mb-3" type="password" name="password" [(ngModel)]="user.password" required
-              placeholder="Contraseña" />
-            <!-- <div class="hstack gap-1">
-              <input id="remember-check" type="checkbox">
-              <label class="small-text" for="remember-check">Recordarme</label>
+          <form [formGroup]="this.loginForm" (ngSubmit)="this.login()">
+            <!--Username-->
+            <div class="form-group mb-3">
+              <input id="username" class="input-data-login" type="text" [formControl]="this.username" placeholder="Usuario" />
+              <div *ngIf="this.username?.invalid && (this.username?.dirty || this.username?.touched)">
+                <div class="error-label" *ngIf="this.username?.errors?.['required']">
+                  Introduce tu nombre de usuario
+                </div>
+              </div>
             </div>
-            <div class="w-100 text-center mt-1 mb-3 small-text">¿Olvidaste tu contraseña?</div> -->
-            <button id="login-btn" class="rounded-3 border-0 text-white fw-bold w-100 py-2" (click)="login()">
-              INGRESAR
+
+            <!--Password-->
+            <div class=" form-group mb-3">
+              <input id="password" class="input-data-login" type="password" [formControl]="this.password" placeholder="Contraseña" />
+              <div *ngIf="this.password?.invalid && (this.password?.dirty || this.password?.touched)">
+                <div class="error-label" *ngIf="this.password?.errors?.['required']">
+                  Introduce tu contraseña
+                </div>
+              </div>
+            </div>
+
+            <!--Submit button-->
+            <button id="login-btn" class="rounded-3 border-0 text-white fw-bold w-100 py-2"
+              [disabled]="this.auth.loading" (click)="login()">
+              <div *ngIf="this.auth.loading" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              {{
+              this.auth.loading ?
+              "CARGANDO" :
+              "INGRESAR"
+              }}
             </button>
           </form>
         </div>
@@ -27,7 +47,8 @@
           <img class="mb-2" src="../../assets/Imagenes/login/mi-familia-y-yo-somos.png" width="450" />
           <img class="mb-4" src="../../assets/Imagenes/login/comunidad-serviacero.png" width="300" />
           <div id="login-info-message" class="mx-auto mb-2" style="max-width: 490px;">
-            Conoce más sobre el proyecto y regístrate al correo <b style="color: #cf1a2f;">comunidad@serviacero.com</b> o en el área de DO y estate atento a nuestras convocatorias.
+            Conoce más sobre el proyecto y regístrate al correo <b style="color: #cf1a2f;">comunidad@serviacero.com</b>
+            o en el área de DO y estate atento a nuestras convocatorias.
           </div>
           <div class="hstack">
             <app-value *ngFor="let value of values" img="{{value.img}}" text="{{value.txt}}"></app-value>

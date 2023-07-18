@@ -1,8 +1,9 @@
-import { ApplicationInitStatus, Component } from '@angular/core'
-import { User } from '../models/user'
-import { LoginService } from '../services/login.service'
+import { Component } from '@angular/core'
+import { AuthService } from '../services/auth.service'
 import { Router } from '@angular/router'
-import { SessionService } from '../services/session.service'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import values from './values'
+import { UserCredentials } from '../models/UserCredentials'
 
 @Component({
   selector: 'app-login',
@@ -10,57 +11,59 @@ import { SessionService } from '../services/session.service'
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  user = { alias: '', password: '' }
+  values = values
 
-  values = [
-    {
-      img: '../../assets/Imagenes/login/icono2.png',
-      txt: '<b>Educación</b> formal y oportunidades de formación.',
-    },
-    {
-      img: '../../assets/Imagenes/login/icono3.png',
-      txt: '<b>Responsabilidad</b> social y educación.',
-    },
-    {
-      img: '../../assets/Imagenes/login/icono4.png',
-      txt: '<b>Bienestar</b> familiar.',
-    },
-    {
-      img: '../../assets/Imagenes/login/icono5.png',
-      txt: '<b>Ambiente propicio</b> para la formación.',
-    }
-  ]
+  loginForm: FormGroup
+  username = new FormControl("", Validators.required)
+  password = new FormControl("", Validators.required)
 
-  constructor(private loginService: LoginService, private session: SessionService,private router: Router) {}
+  constructor(public auth: AuthService, private router: Router) {
+    this.loginForm = new FormGroup({
+      username: this.username,
+      password: this.password
+    })
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  login() {
-    try {
-
-      if(!this.user.alias){
-        alert("Introduce tu nombre de usuario por favor.")
-        return
+  async login() {
+    if (!this.loginForm.invalid) {
+      try {
+        const result = await this.auth.login(
+          this.username.value ?? "",
+          this.password.value ?? "",
+        )
+        console.log(result)
+        this.router.navigate(["/home"])
+      } catch (error) {
+        if (error instanceof Error) {
+          switch (error.name) {
+            case 'NotAuthorizedException':
+              alert("Las credenciales proporcionadas no son válidas o no están autorizadas para acceder.")
+              break
+            case 'UserNotFoundException':
+              alert("No se encontró un usuario con la información proporcionada.")
+              break
+            case 'InvalidParameterException':
+              alert("Se proporcionó un parámetro no válido en la solicitud.")
+              break
+            case 'UserNotConfirmedException':
+              alert("El usuario aún no ha confirmado su cuenta. Por favor, verifica tu correo electrónico para confirmar la cuenta.")
+              break
+            case 'CodeMismatchException':
+              alert("El código proporcionado no coincide con el código esperado. Por favor, verifica el código e inténtalo nuevamente.")
+              break
+            case 'PasswordResetRequiredException':
+              alert("Es necesario restablecer la contraseña antes de poder autenticarse. Por favor, sigue las instrucciones para restablecer tu contraseña.")
+              break
+            default:
+              alert("Ha ocurrido un error durante la autenticación. Por favor, intenta nuevamente más tarde.")
+              break
+          }
+        }
       }
-
-      if(!this.user.password){
-        alert("Introduce una contraseña por favor.")
-        return
-      }
-
-      const loginSuccess = this.loginService.tryLogin(
-        this.user.alias,
-        this.user.password,
-      )
-      if (loginSuccess) {
-        alert('¡Bienvenido!')
-        this.session.setUser(this.user.alias)
-        this.router.navigate(['/home'])
-      } else {
-        alert('Contraseña invalida')
-      }
-    } catch (error) {
-      alert(error)
+    } else {
+      this.loginForm.markAllAsTouched()
     }
   }
 }

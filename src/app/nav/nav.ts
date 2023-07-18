@@ -1,19 +1,19 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { SessionService } from "../services/session.service";
+import { AuthService } from '../services/auth.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-selector: 'app-nav',
-templateUrl: './nav.html',
-styleUrls: ['./nav.css']
+  selector: 'app-nav',
+  templateUrl: './nav.html',
+  styleUrls: ['./nav.css']
 })
 
-export class Nav{
+export class Nav {
 
-  constructor(private session:SessionService, private router:Router){}
+  constructor(public auth: AuthService, private router: Router) { }
 
-  logout(){
-    this.session.logout()
-    this.router.navigate(['/login'])
+  async logout() {
+    await this.auth.logout()
+    this.router.navigate(["/login"])
   }
 }

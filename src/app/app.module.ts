@@ -59,6 +59,7 @@ import { ValueComponent } from './login/value/value.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     CalendarModule,
