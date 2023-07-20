@@ -15,7 +15,21 @@ export class AuthService {
     ClientId: "3463d4fdcrpub7tvo5vkql9jh4"
   })
 
-  public loading = false
+  public loadingSignin = false
+
+  get accessToken() {
+    const currentUser = this.userPool.getCurrentUser()
+    return new Promise<string>((resolve, reject) => {
+      currentUser?.getSession((err:any, session: CognitoUserSession) => {
+        if(err){
+          reject(err)
+        }else{
+          const token = session.getAccessToken().getJwtToken()
+          resolve(token)
+        }
+      })
+    })
+  }
 
   login(username: string, password: string): Promise<CognitoUserSession> {
     const authDetails = new AuthenticationDetails({
@@ -29,16 +43,40 @@ export class AuthService {
     })
 
     return new Promise((resolve, reject) => {
-      this.loading = true
+      this.loadingSignin = true
 
       cognitoUser.authenticateUser(authDetails, {
         onSuccess: (result) => {
-          this.loading = false
+          this.loadingSignin = false
           resolve(result)
         },
         onFailure: (error) => {
-          this.loading = false
-          reject(error)
+          this.loadingSignin = false
+          let message = ""
+          switch (error.name) {
+            case 'NotAuthorizedException':
+              message = "Las credenciales proporcionadas no son válidas o no están autorizadas para acceder."
+              break
+            case 'UserNotFoundException':
+              message = "No se encontró un usuario con la información proporcionada."
+              break
+            case 'InvalidParameterException':
+              message = "Se proporcionó un parámetro no válido en la solicitud."
+              break
+            case 'UserNotConfirmedException':
+              message = "El usuario aún no ha confirmado su cuenta. Por favor, verifica tu correo electrónico para confirmar la cuenta."
+              break
+            case 'CodeMismatchException':
+              message = "El código proporcionado no coincide con el código esperado. Por favor, verifica el código e inténtalo nuevamente."
+              break
+            case 'PasswordResetRequiredException':
+              message = "Es necesario restablecer la contraseña antes de poder autenticarse. Por favor, sigue las instrucciones para restablecer tu contraseña."
+              break
+            default:
+              message = "Ha ocurrido un error durante la autenticación. Por favor, intenta nuevamente más tarde."
+              break
+          }
+          reject(new Error(message))
         }
       })
     })
@@ -46,7 +84,7 @@ export class AuthService {
 
   async logout() {
     const cognitoUser = this.userPool.getCurrentUser()
-    if(cognitoUser){
+    if (cognitoUser) {
       cognitoUser.signOut()
     }
   }

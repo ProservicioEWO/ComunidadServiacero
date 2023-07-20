@@ -11,6 +11,7 @@
   color: white;
   font-size: 14px;
 }
+
 .image-text2 {
   position: absolute;
   top: 35%;
@@ -19,6 +20,7 @@
   color: white;
   font-size: 14px;
 }
+
 .image-text3 {
   position: absolute;
   top: 35%;
@@ -35,4 +37,15 @@
 .active {
   color: #1679a2;
   font-weight: bold;
+}
+
+.city-button:not(:last-child) {
+  border-right: 1px solid #9b9b9b;
+}
+
+.container-loc {
+  background-image: url('../../assets/Imagenes/instalaciones/objeto2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
 }

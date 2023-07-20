@@ -1,62 +1,63 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 @media (max-width: 768px) {
-  #letrero{
+  #letrero {
     display: none;
   }
 }
 
-#form-login-container{
+#form-login-container {
   max-width: 300px;
 }
 
 #login-wrapper {
-    background-image: url(../../assets/Imagenes/login/fondo-página.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(../../assets/Imagenes/login/fondo-página.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-#login-icon{
+#login-icon {
   margin: 0 auto;
 }
 
-#login-btn{
+#login-btn {
   background-color: blueviolet;
 }
 
-.input-data-login{
+.input-data-login {
   width: 100%;
   background-repeat: no-repeat;
   background-position: left center;
   background-size: 30px;
   padding-left: 30px;
-  border:none;
+  border: none;
   border-bottom: 1px solid blueviolet;
 }
 
-.small-text, .input-data-login::placeholder{
+.small-text,
+.input-data-login::placeholder {
   font-weight: 500;
   color: black;
   font-size: 10pt;
 }
 
-#username{
+#username {
   background-image: url(../../assets/Imagenes/login/icono-sobre.png);
 }
 
-#password{
+#password {
   background-image: url(../../assets/Imagenes/login/candado1.png);
 }
 
-app-value{
+app-value {
   width: 25%;
 }
 
-#login-info-message{
+#login-info-message {
   font-size: 10pt;
 }
 
-.error-label{
+.error-label {
   color: red;
   font-size: 10pt;
 }

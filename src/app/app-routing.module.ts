@@ -17,7 +17,11 @@ import { LoginComponent } from './login/login.component'
 import { LoginAccessGuard } from './guards/login-access.guard'
 import { UserAccessGuard } from './guards/user-access.guard'
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [LoginAccessGuard] },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginAccessGuard]
+  },
   {
     path: 'home/:variable',
     component: Conocenos,
@@ -36,13 +40,21 @@ const routes: Routes = [
     ],
     canActivate: [UserAccessGuard],
   },
-  { path: 'programas', component: Programas, canActivate: [UserAccessGuard] },
+  {
+    path: 'programas',
+    component: Programas,
+    canActivate: [UserAccessGuard]
+  },
   {
     path: 'programas/:variable',
     component: Programas,
     canActivate: [UserAccessGuard],
   },
-  { path: 'calendario', component: Calendario, canActivate: [UserAccessGuard] },
+  {
+    path: 'calendario',
+    component: Calendario,
+    canActivate: [UserAccessGuard]
+  },
   {
     path: 'calendario/:variable',
     component: Calendario,
@@ -51,15 +63,14 @@ const routes: Routes = [
   {
     path: 'instalaciones',
     component: Instalaciones,
-    children: [
-      { path: '', component: InstalacionesLeon },
-      { path: 'leon', component: InstalacionesLeon },
-      { path: 'queretaro', component: InstalacionesQueretaro },
-      { path: 'monterrey', component: InstalacionesMonterrey },
-    ],
+    canActivate: [UserAccessGuard]
+  },
+  {
+    path: 'instalaciones/:variable',
+    component: Instalaciones,
     canActivate: [UserAccessGuard],
   },
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: Conocenos, canActivate: [UserAccessGuard] },
 ]
 
@@ -67,4 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

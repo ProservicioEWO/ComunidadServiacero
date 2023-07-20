@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ToastModule } from 'primeng/toast'
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 
 import { AppComponent } from './app.component';
 import { Nav } from './nav/nav';
@@ -19,12 +21,11 @@ import { Footer } from './footer/footer';
 import { Programas } from './programas/programas';
 import { Galeria } from './galeria/galeria';
 import { Calendario } from './calendario/calendario';
-// import { CalendarModule } from 'primeng/calendar';
-import { Familia } from './galeria/familia/familia';
 
 //Rutas
 import { AppRoutingModule } from './app-routing.module';
 import { General } from './galeria/general/general';
+import { Familia } from './galeria/familia/familia';
 import { CalendarComponent } from './calendar/calendar.component';
 import { Prepa } from './galeria/prepa/prepa';
 import { Escuela } from './galeria/escuela/escuela';
@@ -65,6 +66,8 @@ import { ValueComponent } from './login/value/value.component';
     CalendarModule,
     BrowserAnimationsModule,
     NgImageSliderModule,
+    ToastModule,
+    ProgressSpinnerModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [],
@@ -73,4 +76,4 @@ import { ValueComponent } from './login/value/value.component';
     Calendario
   ]
 })
-export class AppModule {}
+export class AppModule { }

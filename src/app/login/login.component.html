@@ -9,7 +9,8 @@
           <form [formGroup]="this.loginForm" (ngSubmit)="this.login()">
             <!--Username-->
             <div class="form-group mb-3">
-              <input id="username" class="input-data-login" type="text" [formControl]="this.username" placeholder="Usuario" />
+              <input id="username" class="input-data-login" type="text" [formControl]="this.username"
+                placeholder="Usuario" />
               <div *ngIf="this.username?.invalid && (this.username?.dirty || this.username?.touched)">
                 <div class="error-label" *ngIf="this.username?.errors?.['required']">
                   Introduce tu nombre de usuario
@@ -19,7 +20,8 @@
 
             <!--Password-->
             <div class=" form-group mb-3">
-              <input id="password" class="input-data-login" type="password" [formControl]="this.password" placeholder="Contraseña" />
+              <input id="password" class="input-data-login" type="password" [formControl]="this.password"
+                placeholder="Contraseña" />
               <div *ngIf="this.password?.invalid && (this.password?.dirty || this.password?.touched)">
                 <div class="error-label" *ngIf="this.password?.errors?.['required']">
                   Introduce tu contraseña
@@ -29,16 +31,17 @@
 
             <!--Submit button-->
             <button id="login-btn" class="rounded-3 border-0 text-white fw-bold w-100 py-2"
-              [disabled]="this.auth.loading" (click)="login()">
-              <div *ngIf="this.auth.loading" class="spinner-border spinner-border-sm" role="status">
+              [disabled]="this.auth.loadingSignin" (click)="login()">
+              <div *ngIf="this.auth.loadingSignin" class="spinner-border spinner-border-sm" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
               {{
-              this.auth.loading ?
+              this.auth.loadingSignin ?
               "CARGANDO" :
               "INGRESAR"
               }}
             </button>
+            <p-toast position="bottom-left" [breakpoints]="{'920px':{width: '100%', margin: '0px !important', left: 0, bottom: 0}}"></p-toast>
           </form>
         </div>
       </div>
