@@ -26,8 +26,10 @@
 
 <div class="container mt-5">
   <div *ngFor="let location of this.currentCityLocations">
-    <h1 class="text-center mt-5">{{location.name}}</h1>
-    <img src="https://comunidadserviacero.com/assets/Imagenes/instalaciones/aulas_leon.png"/>
+    <h1 class="text-center mt-5">{{location.name.toUpperCase()}}</h1>
+    <div class="row">
+      <img [src]="this.location.imgUrl" />
+    </div>
   </div>
 </div>
 

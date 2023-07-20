@@ -1,11 +1,13 @@
+import AuthFailureError from '../errors/AuthFailureError';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
-import { City } from '../models/City';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '../models/Location';
+import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers';
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Subject, takeUntil } from 'rxjs';
-import AuthFailureError from '../errors/AuthFailureError';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { Location, City } from '../models';
 
 @Component({
   selector: 'app-instalaciones',
@@ -16,8 +18,10 @@ export class Instalaciones implements OnInit {
   private destroy$ = new Subject<void>()
 
   curentCity: string | null = null
-  currentCityLocations: Location[] | null = null
+  currentCityLocations: NLocation[] | null = null
+
   accessToken: string | null = null
+  idToken: string | null = null
 
   citiesState = {
     data: null,
@@ -28,8 +32,10 @@ export class Instalaciones implements OnInit {
   constructor(private route: ActivatedRoute, router: Router, private api: ApiService, private auth: AuthService) {
     this.auth.accessToken.then(value => {
       this.accessToken = value
-    }).catch(err => {
-      router.navigate(["/login"])
+    })
+
+    this.auth.idToken.then(value => {
+      this.idToken = value
     })
   }
 
@@ -38,11 +44,24 @@ export class Instalaciones implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.accessToken) {
+    if (!this.accessToken || !this.idToken) {
       throw new AuthFailureError()
     }
 
-    this.api.getCities(this.accessToken)
+    const s3Client = new S3Client({
+      region: 'us-east-1',
+      credentials: fromCognitoIdentityPool({
+        identityPoolId: 'us-east-1:80f0cb2c-4696-40d1-abad-db84a85d70d4',
+        clientConfig: {
+          region: 'us-east-1'
+        },
+        logins: {
+          "cognito-idp.us-east-1.amazonaws.com/us-east-1_oud83NQk8": this.idToken
+        }
+      })
+    })
+
+    this.api.getCities()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (cities) => this.citiesState.data = cities,
@@ -56,14 +75,32 @@ export class Instalaciones implements OnInit {
               if (cityId && this.citiesState.data) {
                 const city = this.citiesState.data.find(e => e.id === cityId)
                 if (city) {
-                  this.currentCityLocations = city.locations
+                  Promise.all(
+                    city.locations.map<Promise<NLocation>>(async e => {
+                      const imgUrl = await getSignedUrl(s3Client,
+                        new GetObjectCommand({
+                          Bucket: 'cs-static-res',
+                          Key: e.imageKey
+                        }),
+                        { expiresIn: 300 }
+                      )
+                      return { ...e, imgUrl }
+                    })
+                  ).then(data => this.currentCityLocations = data)
                 }
               }
             })
         }
       })
-
   }
+}
+
+interface NCity extends City {
+  imgUrl: string
+}
+
+interface NLocation extends Location {
+  imgUrl: string
 }
 
 interface State<T> {

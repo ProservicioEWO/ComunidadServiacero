@@ -27,9 +27,17 @@
         <li class="nav-item item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/','calendario']">Calendario</a>
         </li>
-        <li *ngIf="true" class="nav-item" role="button">
+        <li class="nav-item item text-white text-opacity-50">
+          <div class="vr h-100 mx-2"></div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="bi bi-person-fill"></i>
+            {{this.auth.username}}
+          </a>
+        </li>
+        <li *ngIf="true" class="nav-item item" role="button">
           <a class="nav-link" (click)="this.logout()" style="color:#f82e3e;">
-            <!-- <i class="bi bi-box-arrow-right"></i> -->
             Cerrar Sesión
             <i class="bi bi-box-arrow-in-right"></i>
           </a>

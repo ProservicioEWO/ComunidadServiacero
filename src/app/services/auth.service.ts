@@ -5,6 +5,7 @@ import {
   CognitoUserSession
 } from 'amazon-cognito-identity-js';
 import { Injectable } from '@angular/core';
+import AuthFailureError from '../errors/AuthFailureError';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,41 @@ export class AuthService {
 
   get accessToken() {
     const currentUser = this.userPool.getCurrentUser()
+    if (!currentUser) {
+      throw new AuthFailureError()
+    }
     return new Promise<string>((resolve, reject) => {
-      currentUser?.getSession((err:any, session: CognitoUserSession) => {
-        if(err){
+      currentUser.getSession((err: any, session: CognitoUserSession) => {
+        if (err) {
           reject(err)
-        }else{
-          const token = session.getAccessToken().getJwtToken()
-          resolve(token)
+        } else {
+          const accessToken = session.getAccessToken().getJwtToken()
+          resolve(accessToken)
         }
       })
     })
+  }
+
+  get idToken() {
+    const currentUser = this.userPool.getCurrentUser()
+    if (!currentUser) {
+      throw new AuthFailureError()
+    }
+    return new Promise<string>((resolve, reject) => {
+      currentUser.getSession((err: any, session: CognitoUserSession) => {
+        if (err) {
+          reject(err)
+        } else {
+          const idToken = session.getIdToken().getJwtToken()
+          resolve(idToken)
+        }
+      })
+    })
+  }
+
+  get username() {
+    const cognitoUser = this.userPool.getCurrentUser()
+    return cognitoUser?.getUsername()
   }
 
   login(username: string, password: string): Promise<CognitoUserSession> {
@@ -87,11 +113,6 @@ export class AuthService {
     if (cognitoUser) {
       cognitoUser.signOut()
     }
-  }
-
-  getUsername() {
-    const cognitoUser = this.userPool.getCurrentUser()
-    return cognitoUser?.getUsername()
   }
 
   isAuthenticated(): Promise<boolean> {
