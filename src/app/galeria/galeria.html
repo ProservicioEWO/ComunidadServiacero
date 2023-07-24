@@ -15,49 +15,45 @@
   </div>
 </div>
 
-<div class="container mt-5 mb-3">
-  <div class="row">
-    <div class="col-md-12" style="height: 100%; background-color: white">
-      <ul class="nav nav-pills justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="['prepa']" routerLinkActive="active">Prepa Abierta</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="['familia']" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">Dia de la Familia</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="['escuela']" routerLinkActive="active">Adopta una escuela</a>
-        </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Campaña de Difusion</a>
-          </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="['kickoff']" routerLinkActive="active">Kickoff</a>
-        </li>
-      </ul>
+<div *ngIf="this.eventsState.loading; else eventsButtons" class="d-flex justify-content-center mt-5">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<ng-template #eventsButtons>
+  <div class="container mt-5 mb-3">
+    <div class="row">
+      <div class="col-md-12" style="height: 100%; background-color: white">
+        <ul class="nav nav-pills justify-content-center">
+          <li class="nav-item" *ngFor="let event of this.eventsState.data">
+            <a class="nav-link" href="#" [routerLink]="['/galeria', event.id]" routerLinkActive="active">
+              {{event.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>
 
 <router-outlet></router-outlet>
 
 <div class="container" style="margin-top: 50px;">
-  <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-      <h5>¿Qué es Comunidad Serviacero?</h5>
-      <div class="video">
-        <video controls #videoPlayer style="width: 100%; height: auto;">
-          <!-- <source src="https://www.dropbox.com/s/lt32w0y7uotxfhb/ComunidaServiacero_General.mp4?raw=1" -->
-          <source src="./../../assets/Videos/ComunidaServiacero_General.mp4"
-            type="video/mp4" />
-          Browser not supported
-        </video>
-      </div>
-    </div>
-    <div class="col-lg-2"></div>
+  <div *ngIf="this.videoState.loading; else videoCont" class="d-flex justify-content-center mt-5">
+    <p-progressSpinner></p-progressSpinner>
   </div>
+  <ng-template #videoCont>
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <h5>¿Qué es Comunidad Serviacero?</h5>
+        <div class="video">
+          <video controls #videoPlayer style="width: 100%;">
+            <source [src]="this.videoState.data" type="video/mp4" />
+            Browser not supported
+          </video>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </ng-template>
 </div>
-
 <app-footer></app-footer>

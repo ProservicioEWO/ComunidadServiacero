@@ -1,18 +1,16 @@
-import AuthFailureError from '../errors/AuthFailureError';
-import { AuthService } from './auth.service';
 import { City } from '../models/City';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Event } from '../models';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Location } from '../models/Location';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService{
+export class ApiService {
   private apiBaseUrl = "https://njvggk237a.execute-api.us-east-1.amazonaws.com"
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Obtiene una lista de ciudades y sus respectivas instalaciones
@@ -34,9 +32,29 @@ export class ApiService{
     })
   }
 
+  /**
+   * Obtiene una lista de eventos
+   * @returns Un Observable que contiene la lista de eventos
+   */
   getEvents() {
     return this.get<Event[]>({
       endpoint: "/events"
+    })
+  }
+
+  /**
+   * Obtiene una lista de programas 
+   * @returns Un Observable que contiene la lista de programas
+   */
+  getProgramsBySection(section: number) {
+    return this.get<any[]>({
+      endpoint: `/programs?_append=city&section=${section}`
+    })
+  }
+
+  getProgramById(id: string) {
+    return this.get<any[]>({
+      endpoint: `/programs/${id}`
     })
   }
 

@@ -22,5 +22,4 @@ export class LoginAccessGuard implements CanActivate {
 
     return true
   }
-
 }

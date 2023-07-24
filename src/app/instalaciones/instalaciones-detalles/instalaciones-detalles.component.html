@@ -1,0 +1,13 @@
+<div *ngIf="this.locationsState.loading; else locationsCont" class="d-flex justify-content-center mt-5">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<ng-template #locationsCont>
+  <div class="container mt-5">
+    <div *ngFor="let location of this.locationsState.data">
+      <h1 class="text-center mt-5">{{location.name.toUpperCase()}}</h1>
+      <div class="row">
+        <img [src]="this.location.imgUrl" />
+      </div>
+    </div>
+  </div>  
+</ng-template>

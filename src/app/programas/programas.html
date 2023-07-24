@@ -18,375 +18,85 @@
 <div class="body2">
   <div class="container">
     <div class="row" style="padding-top: 30px;">
-
       <div class="col-sm-1 col-md-2 col-lg-1 col-xl-1">
       </div>
-
       <div class="col-sm-10 col-md-8 col-lg-10 col-xl-10 text-center">
         <p style="color: black; font-weight: 600;">Comunidad Serviacero ofrece programas que puedes tomar y participar
           para mejorar tu desarrollo personal y profesional</p>
       </div>
-
       <div class="col-sm-1 col-md-2 col-lg-1 col-xl-1"></div>
     </div>
 
-    <div class="row" style="padding-top: 30px;">
-
-      <div class="col-sm-0 col-md-0 col-lg-2 col-xl-2"></div>
-
-      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8" style="height: 100%; background-color: white;">
+    <div class="row mb-3" style="padding-top: 30px;">
+      <div class="col" style="height: 100%; background-color: white;">
         <div role="tabpanel">
           <ul class="nav nav-tab" style="width: 100%;">
             <div class="row" style="width: 100%;">
-
               <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
-                Educación
-                <li (click)="onTabClick('educacion')" [class.active]="activeTab == 'educacion'" class="tab-link">
-                  <img src="./../../assets/Imagenes/programas/icono_eduacion.png" class="icon-image responsive"
-                    alt="arte" title="Educación" />
+                <li class="tab-link p-2" routerLinkActive="active">
+                  <div class="vstack align-items-center gap-2">
+                    <span>Educación</span>
+                    <img src="https://d32ada10zh60nl.cloudfront.net/images/courses-sections/course1.png"
+                      class="icon-image responsive" alt="arte" title="Educación" [routerLink]="['/programas', 1]" />
+                  </div>
                 </li>
               </div>
-
               <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
-                Salud
-                <li (click)="onTabClick('salud')" [class.active]="activeTab == 'salud'" class="tab-link">
-                  <img src="./../../assets/Imagenes/programas/icono_salud.png" class="icon-image responsive"
-                    alt="educacion" title="Salud" />
+                <li class="tab-link p-2" routerLinkActive="active">
+                  <div class="vstack align-items-center gap-2">
+                    <span>Salud</span>
+                    <img src="https://d32ada10zh60nl.cloudfront.net/images/courses-sections/course2.png"
+                      class="icon-image responsive" alt="educacion" title="Salud" [routerLink]="['/programas', 2]" />
+                  </div>
                 </li>
               </div>
-
               <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
-                Arte
-                <li (click)="onTabClick('arte')" [class.active]="activeTab == 'arte'" class="tab-link">
-                  <img src="./../../assets/Imagenes/programas/icono_arte.png" class="icon-image responsive" alt="arte"
-                    title="Arte" />
+                <li class="tab-link p-2" routerLinkActive="active">
+                  <div class="vstack align-items-center gap-2">
+                    Arte
+                    <img src="https://d32ada10zh60nl.cloudfront.net/images/courses-sections/course3.png"
+                      class="icon-image responsive" alt="arte" title="Arte" [routerLink]="['/programas', 3]" />
+                  </div>
                 </li>
               </div>
-
               <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
-                Deporte
-                <li (click)="onTabClick('deporte')" [class.active]="activeTab == 'deporte'" class="tab-link">
-                  <img src="./../../assets/Imagenes/programas/icono_deporte.png" class="icon-image responsive"
-                    alt="deporte" title="Deporte" />
+                <li class="tab-link p-2" routerLinkActive="active">
+                  <div class="vstack align-items-center gap-2">
+                    Deporte
+                    <img src="https://d32ada10zh60nl.cloudfront.net/images/courses-sections/course4.png"
+                      class="icon-image responsive" alt="deporte" title="Deporte" [routerLink]="['/programas', 4]" />
+                  </div>
                 </li>
               </div>
-
-
             </div>
           </ul>
-
-          <div *ngIf="activeTab == 'educacion'" class="w-100">
-            <div class="row">
-              <div class="col-12">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-11" aria-expanded="false" aria-controls="flush-collapseOne">
-                        León
-                      </button>
-                    </h2>
-                    <div id="flush-11" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <ul class="nav">
-                          <li (click)="onCursoClick('dv11' + i.toString())"
-                            class="nav-item col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
-                            *ngFor="let menuList of array11; let i = index" [attr.id]="'dv11' + i">
-
-                            {{menuList}}
-
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-12" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Querétaro
-                      </button>
-                    </h2>
-
-                    <div id="flush-12" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <ul class="nav">
-                          <li (click)="onCursoClick('dv12' + i.toString())"
-                            class="nav-item col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
-                            *ngFor="let menuList of array12; let i = index" [attr.value]="i" [attr.id]="'dv12' + i">
-
-                            {{menuList}}
-
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-13" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Monterrey
-                      </button>
-                    </h2>
-                    <div id="flush-13" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-
-                        <ul class="nav">
-                          <li (click)="onCursoClick('dv13' + i.toString())"
-                            class="nav-item col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
-                            *ngFor="let menuList of array13; let i = index" [attr.value]="i" [attr.id]="'dv13' + i">
-
-                            {{menuList}}
-
-                          </li>
-                        </ul>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="activeTab == 'salud'" class="w-100">
-            <div class="row">
-              <div class="col-12">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                  <div class="accordion-item">
-
-                    <h2 class="accordion-header" id="flush-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-21" aria-expanded="false" aria-controls="flush-collapseOne">
-                        León
-                      </button>
-
-                    </h2>
-
-                    <div id="flush-21" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h2>Salud León</h2>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-22" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Querétaro
-                      </button>
-                    </h2>
-
-                    <div id="flush-22" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Salud Querétaro</h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-23" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Monterrey
-                      </button>
-                    </h2>
-                    <div id="flush-23" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Salud Monterrey</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="activeTab == 'arte'" class="w-100">
-            <div class="row">
-              <div class="col-12">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-31" aria-expanded="false" aria-controls="flush-collapseOne">
-                        León
-                      </button>
-                    </h2>
-                    <div id="flush-31" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Arte León</h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-32" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Querétaro
-                      </button>
-                    </h2>
-                    <div id="flush-32" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Arte Querétaro</h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-33" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Monterrey
-                      </button>
-                    </h2>
-
-                    <div id="flush-33" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Arte Monterrey</h5>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="activeTab == 'deporte'" class="w-100">
-            <div class="row">
-              <div class="col-12">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-41" aria-expanded="false" aria-controls="flush-collapseOne">
-                        León
-                      </button>
-                    </h2>
-                    <div id="flush-41" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Deporte León</h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-42" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Querétaro
-                      </button>
-                    </h2>
-                    <div id="flush-42" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Deporte Querétaro</h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-43" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Monterrey
-                      </button>
-                    </h2>
-                    <div id="flush-43" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h5>Deporte Monterrey</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="col-sm-0 col-md-0 col-lg-2 col-xl-2"></div>
-    </div>
-
-    <div id="dvCurso" style="margin-top: 20px;">
-      <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-          <h3 id="lbTitulo"></h3>
-        </div>
-        <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
-      </div>
-
-      <div class="row">
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <p id="lbDesc"></p>
-
-          <p>PLAN CURRICULAR:</p>
-
-          <p id="lbMaterias"></p>
-
-          <p>REQUISITOS DEL PROGRAMA:</p>
-
-          <p id="lbReq"></p>
-
-          <button (click)="OnInscripcion();" type="button" class="btn btn-primary" id="btSolitica"> Quiero
-            Inscribirme
-          </button><br><br>
-
-          <button type="button" class="btn btn-primary" id="btReglamento"> Consultar Política
-          </button>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <p>COSTO DEL PROGRAMA:</p>
-
-          <p id="lbCosto"></p>
-
-          <p>¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
-
-          <p id="lbApoyo"></p>
-
-          <p id="lbDate1"></p>
-
-          <p id="lbDate2"></p>
-
-          <p id="lbTime"></p>
-
-          <!-- <p id="lbCondiciones1">CONDICIONES DE APOYO:</p>
-
-          <p id="lbCondiciones2"></p> -->
-
         </div>
       </div>
     </div>
+    <div *ngIf="this.cityGroupState.loading; else programsCont" class="vstack align-items-center mt-5">
+      <p-progressSpinner></p-progressSpinner>
+      <span>cargando programas</span>
+    </div>
+    <ng-template #programsCont>
+      <p-accordion [activeIndex]="0" [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
+        <p-accordionTab *ngFor="let cityGroup of this.cityGroupState.data" [header]="cityGroup.name">
+          <div class="row row-cols-2">
+            <div *ngFor="let program of cityGroup.programs" class="col">
+              <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}" routerLinkActive="active"
+                class="text-decoration-none text-black p-2">
+                <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
+                  [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
+                {{program.name}}
+              </a>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </ng-template>
+
+    <router-outlet></router-outlet>
 
   </div>
 </div>
-<script>
-  $('.collapse').collapse()
-</script>
 
 <app-footer></app-footer>

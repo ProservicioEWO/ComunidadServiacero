@@ -8,6 +8,7 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Subject, takeUntil } from 'rxjs';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { Location, City } from '../models';
+import { State } from '../utils/State';
 
 @Component({
   selector: 'app-instalaciones',
@@ -16,12 +17,9 @@ import { Location, City } from '../models';
 })
 export class Instalaciones implements OnInit {
   private destroy$ = new Subject<void>()
+  private idToken: string | null = null
 
   curentCity: string | null = null
-  currentCityLocations: NLocation[] | null = null
-
-  accessToken: string | null = null
-  idToken: string | null = null
 
   citiesState = {
     data: null,
@@ -30,10 +28,6 @@ export class Instalaciones implements OnInit {
   } as State<City[]>
 
   constructor(private route: ActivatedRoute, router: Router, private api: ApiService, private auth: AuthService) {
-    this.auth.accessToken.then(value => {
-      this.accessToken = value
-    })
-
     this.auth.idToken.then(value => {
       this.idToken = value
     })
@@ -44,7 +38,7 @@ export class Instalaciones implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.accessToken || !this.idToken) {
+    if (!this.idToken) {
       throw new AuthFailureError()
     }
 
@@ -66,45 +60,11 @@ export class Instalaciones implements OnInit {
       .subscribe({
         next: (cities) => this.citiesState.data = cities,
         error: (err) => this.citiesState.error = err,
-        complete: () => {
-          this.citiesState.loading = false
-          this.route.paramMap
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(params => {
-              let cityId = params.get("variable")
-              if (cityId && this.citiesState.data) {
-                const city = this.citiesState.data.find(e => e.id === cityId)
-                if (city) {
-                  Promise.all(
-                    city.locations.map<Promise<NLocation>>(async e => {
-                      const imgUrl = await getSignedUrl(s3Client,
-                        new GetObjectCommand({
-                          Bucket: 'cs-static-res',
-                          Key: e.imageKey
-                        }),
-                        { expiresIn: 300 }
-                      )
-                      return { ...e, imgUrl }
-                    })
-                  ).then(data => this.currentCityLocations = data)
-                }
-              }
-            })
-        }
+        complete: () => this.citiesState.loading = false
       })
   }
 }
 
 interface NCity extends City {
   imgUrl: string
-}
-
-interface NLocation extends Location {
-  imgUrl: string
-}
-
-interface State<T> {
-  loading: boolean
-  data: T | null
-  error: string | null
 }

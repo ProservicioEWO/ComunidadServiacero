@@ -6,6 +6,7 @@ import {
 } from 'amazon-cognito-identity-js';
 import { Injectable } from '@angular/core';
 import AuthFailureError from '../errors/AuthFailureError';
+import { reject } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -19,37 +20,45 @@ export class AuthService {
   public loadingSignin = false
 
   get accessToken() {
-    const currentUser = this.userPool.getCurrentUser()
-    if (!currentUser) {
-      throw new AuthFailureError()
-    }
-    return new Promise<string>((resolve, reject) => {
-      currentUser.getSession((err: any, session: CognitoUserSession) => {
-        if (err) {
-          reject(err)
-        } else {
-          const accessToken = session.getAccessToken().getJwtToken()
-          resolve(accessToken)
-        }
+    try {
+      const currentUser = this.userPool.getCurrentUser()
+      if (!currentUser) {
+        throw new AuthFailureError()
+      }
+      return new Promise<string>((resolve, reject) => {
+        currentUser.getSession((err: any, session: CognitoUserSession) => {
+          if (err) {
+            reject(err)
+          } else {
+            const accessToken = session.getAccessToken().getJwtToken()
+            resolve(accessToken)
+          }
+        })
       })
-    })
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 
   get idToken() {
-    const currentUser = this.userPool.getCurrentUser()
-    if (!currentUser) {
-      throw new AuthFailureError()
-    }
-    return new Promise<string>((resolve, reject) => {
-      currentUser.getSession((err: any, session: CognitoUserSession) => {
-        if (err) {
-          reject(err)
-        } else {
-          const idToken = session.getIdToken().getJwtToken()
-          resolve(idToken)
-        }
+    try {
+      const currentUser = this.userPool.getCurrentUser()
+      if (!currentUser) {
+        throw new AuthFailureError()
+      }
+      return new Promise<string>((resolve, reject) => {
+        currentUser.getSession((err: any, session: CognitoUserSession) => {
+          if (err) {
+            reject(err)
+          } else {
+            const idToken = session.getIdToken().getJwtToken()
+            resolve(idToken)
+          }
+        })
       })
-    })
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 
   get username() {
@@ -72,11 +81,11 @@ export class AuthService {
       this.loadingSignin = true
 
       cognitoUser.authenticateUser(authDetails, {
-        onSuccess: (result) => {
+        onSuccess: result => {
           this.loadingSignin = false
           resolve(result)
         },
-        onFailure: (error) => {
+        onFailure: error => {
           this.loadingSignin = false
           let message = ""
           switch (error.name) {
@@ -116,22 +125,26 @@ export class AuthService {
   }
 
   isAuthenticated(): Promise<boolean> {
-    const cognitoUser = this.userPool.getCurrentUser()
+    try {
+      const cognitoUser = this.userPool.getCurrentUser()
 
-    if (!cognitoUser) {
-      return Promise.resolve(false)
-    }
+      if (!cognitoUser) {
+        return Promise.resolve(false)
+      }
 
-    return new Promise((resolve, reject) => {
-      cognitoUser.getSession((err: any, session: CognitoUserSession) => {
-        if (err) {
-          reject(err)
-        } else if (!session.isValid()) {
-          resolve(false)
-        } else {
-          resolve(true)
-        }
+      return new Promise((resolve, reject) => {
+        cognitoUser.getSession((err: any, session: CognitoUserSession) => {
+          if (err) {
+            reject(err)
+          } else if (!session.isValid()) {
+            resolve(false)
+          } else {
+            resolve(true)
+          }
+        })
       })
-    })
+    } catch (error) {
+      return Promise.reject(false)
+    }
   }
 }

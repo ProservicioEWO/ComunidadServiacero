@@ -15,14 +15,18 @@ export class UserAccessGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) { }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const isAuth = await this.auth.isAuthenticated()
+    try {
+      const isAuth = await this.auth.isAuthenticated()
 
-    if (!isAuth) {
+      if (!isAuth) {
+        throw new Error()
+      }
+    } catch (error) {
       this.router.navigate(["/login"])
       return false
     }
 
-    return isAuth
+    return true
   }
 
 }
