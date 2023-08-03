@@ -66,6 +66,7 @@ export class Calendario implements OnInit {
   }
 
   previous(): void {
+    
     if (this.view === CalendarView.Month) {
       // Navegar al mes anterior
       this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() - 1, 1);
