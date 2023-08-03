@@ -95,3 +95,7 @@ li {
 .blue-cell {
   background-color: blue !important;
 }
+
+::ng-deep .p-tabview-panels{
+  padding: 1.25rem 0 !important;
+}

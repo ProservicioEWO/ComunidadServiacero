@@ -1,4 +1,6 @@
-import { CommonModule } from '@angular/common';
+import localeEs from '@angular/common/locales/es'
+
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +15,7 @@ import { GalleriaModule } from 'primeng/galleria'
 import { AccordionModule } from 'primeng/accordion'
 import { BadgeModule } from 'primeng/badge'
 import { TabViewModule } from 'primeng/tabview';
+import { ListboxModule } from 'primeng/listbox';
 
 import { AppComponent } from './app.component';
 import { Calendario } from './calendario/calendario';
@@ -25,7 +28,7 @@ import { Programas } from './programas/programas';
 
 //Rutas
 import { AppRoutingModule } from './app-routing.module';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './calendario/calendar/calendar.component';
 import { LoginComponent } from './login/login.component';
 import { ValueComponent } from './login/value/value.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -33,6 +36,8 @@ import { AuthService } from './services/auth.service';
 import { GaleriaDetalles } from './galeria/galeria-detalles/galeria-detalles.component';
 import { InstalacionesDetalles } from './instalaciones/instalaciones-detalles/instalaciones-detalles.component';
 import { ProgramasDetalles } from './programas/programas-detalles/programas-detalles.component';
+
+registerLocaleData(localeEs)
 
 @NgModule({
 
@@ -68,6 +73,7 @@ import { ProgramasDetalles } from './programas/programas-detalles/programas-deta
     AccordionModule,
     BadgeModule,
     TabViewModule,
+    ListboxModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
@@ -76,7 +82,8 @@ import { ProgramasDetalles } from './programas/programas-detalles/programas-deta
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    }
+  ],
   bootstrap: [AppComponent],
   exports: [
     Calendario
