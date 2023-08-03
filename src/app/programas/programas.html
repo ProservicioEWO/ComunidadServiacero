@@ -78,15 +78,16 @@
       <span>cargando programas</span>
     </div>
     <ng-template #programsCont>
-      <p-accordion [activeIndex]="0" [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
+      <p-accordion [activeIndex]="0" [(activeIndex)]="this.currentTabIndex"
+        (activeIndexChange)="handleChangeIndex($event)">
         <p-accordionTab *ngFor="let cityGroup of this.cityGroupState.data" [header]="cityGroup.name">
           <div class="row row-cols-2">
             <div *ngFor="let program of cityGroup.programs" class="col">
-              <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}" routerLinkActive="active"
-                class="text-decoration-none text-black p-2">
+              <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
+                routerLinkActive="active" class="text-decoration-none text-black p-2">
                 <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
                   [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
-                {{program.name}}
+                {{program.shortName}}
               </a>
             </div>
           </div>

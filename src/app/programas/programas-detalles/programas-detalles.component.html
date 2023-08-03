@@ -3,58 +3,106 @@
   <span>cargando detalles</span>
 </div>
 <ng-template #programCont>
-  <div id="dvCurso" style="margin-top: 20px;">
-    <div class="row">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-        <h3 id="lbTitulo">{{this.programaState.data.name}}</h3>
+  <div *ngIf="this.programaState.data.type == 'i'">
+    <div id="dvCurso" style="margin-top: 20px;">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <h3 id="lbTitulo">{{this.programaState.data.name}}</h3>
+        </div>
+        <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
       </div>
-      <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
+  
+      <div class="row">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <p id="lbDesc">
+            {{this.programaState.data.description}}
+          </p>
+  
+          <p class="h5">PLAN CURRICULAR:</p>
+          <p id="lbMaterias" [innerHTML]="this.programaState.data.plan"></p>
+  
+          <p class="h5">REQUISITOS DEL PROGRAMA:</p>
+          <p id="lbReq" [innerHTML]="this.programaState.data.req"></p>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <p class="h5">COSTO DEL PROGRAMA:</p>
+          <p id="lbCosto">
+            {{this.programaState.data.cost}}
+          </p>
+  
+          <p class="h5">¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
+          <p id="lbApoyo">
+            {{this.programaState.data.advantage}}
+          </p>
+  
+          <p id="lbDate1">
+            <span>Fecha inicio:</span>
+            {{this.programaState.data.date}}
+          </p>
+          <p id="lbDate2"></p>
+  
+          <p id="lbTime">
+            <span>Duración:</span>
+            {{this.programaState.data.duration}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-md-auto">
+          <div class="vstack gap-2">
+            <a [href]="this.programaState.data.mainLink" target="_blank" class="btn btn-primary">
+              Quiero Inscribirme
+            </a>
+            <a [href]="this.programaState.data.rulesLink" target="_blank" class="btn btn-primary" id="btReglamento">
+              Consultar Política
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="row">
-      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <p id="lbDesc">
-          {{this.programaState.data.description}}
-        </p>
-
-        <p class="h5">PLAN CURRICULAR:</p>
-        <p id="lbMaterias" [innerHTML]="this.programaState.data.plan"></p>
-
-        <p class="h5">REQUISITOS DEL PROGRAMA:</p>
-        <p id="lbReq" [innerHTML]="this.programaState.data.req"></p>
+  </div>
+  <div *ngIf="this.programaState.data.type == 'e'">
+    <div id="dvCurso2" style="margin-top: 20px;">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <h3 id="lbTitulo">{{this.programaState.data.name}}</h3>
+        </div>
+        <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
       </div>
-      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <p class="h5">COSTO DEL PROGRAMA:</p>
-        <p id="lbCosto">
-          {{this.programaState.data.cost}}
-        </p>
 
-        <p class="h5">¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
-        <p id="lbApoyo">
-          {{this.programaState.data.advantage}}
-        </p>
+      <div class="row">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <p id="lbDesc">
+            {{this.programaState.data.description}}
+          </p>
+  
+          <p class="h5">BENEFICIOS DE LA COMUNIDAD SERVIACERO:</p>
+          <p id="lbMaterias" [innerHTML]="this.programaState.data.advantage"></p>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <p class="h5">COSTO DEL PROGRAMA:</p>
+          <p id="lbCosto">
+            {{this.programaState.data.cost}}
+          </p>
 
-        <p id="lbDate1">
-          <span>Fecha inicio:</span>
-          {{this.programaState.data.date}}
-        </p>
-        <p id="lbDate2"></p>
-
-        <p id="lbTime">
-          <span>Duración:</span>
-          {{this.programaState.data.duration}}
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-md-auto">
-        <div class="vstack gap-2">
-          <a [href]="this.programaState.data.mainLink" class="btn btn-primary">
-            Quiero Inscribirme
-          </a>
-          <a [href]="this.programaState.data.rulesLink" class="btn btn-primary" id="btReglamento">
-            Consultar Política
-          </a>
+          <p class="h5">DOMICILIO:</p>
+          <p id="lbCosto">
+            {{this.programaState.data.address}}
+          </p>
+  
+          <p class="h5">CONTACTO</p>
+          <p>
+            {{this.programaState.data.phone}}
+            <br/>
+            {{this.programaState.data.email}}
+          </p>
+  
+          <p>
+            <a [href]="this.programaState.data.websiteLink">
+              {{this.programaState.data.institution}}
+            </a>
+          </p>
         </div>
       </div>
     </div>

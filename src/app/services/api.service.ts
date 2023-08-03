@@ -43,6 +43,16 @@ export class ApiService {
   }
 
   /**
+   * Obtiene una lista de programas
+   * @returns Un Observable que contiene la lista de eventos
+   */
+  getPrograms() {
+    return this.get<any[]>({
+      endpoint: "/programs?_append=city"
+    })
+  }
+
+  /**
    * Obtiene una lista de programas 
    * @returns Un Observable que contiene la lista de programas
    */

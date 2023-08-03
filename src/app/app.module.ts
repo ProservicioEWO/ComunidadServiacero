@@ -12,6 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { GalleriaModule } from 'primeng/galleria'
 import { AccordionModule } from 'primeng/accordion'
 import { BadgeModule } from 'primeng/badge'
+import { TabViewModule } from 'primeng/tabview';
 
 import { AppComponent } from './app.component';
 import { Calendario } from './calendario/calendario';
@@ -66,6 +67,7 @@ import { ProgramasDetalles } from './programas/programas-detalles/programas-deta
     GalleriaModule,
     AccordionModule,
     BadgeModule,
+    TabViewModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
