@@ -18,7 +18,7 @@
 
 <div class="dvCalendario">
   <div class="container">
-    <div class="row">
+    <div class="row g-4">
 
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8" id="dvPcal">
         <!-- Calendario -->
@@ -44,31 +44,36 @@
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <!-- Pestañas de los Almacenes -->
-        <div *ngIf="this.programsByCity.loading; else tabs" class="d-flex justify-content-center">
-          <p-progressSpinner></p-progressSpinner>
-        </div>
-        <ng-template #tabs>
+        <div class="row">
           <p class="h5">Agrega un filtro:</p>
-          <p-tabView>
-            <p-tabPanel *ngFor="let city of this.programsByCity.data" [header]="city.cityName">
-              <p-listbox [options]="city.cityData" (onChange)="listOnChange" [filter]="true" [style]="{'padding': '0'}"
-                filterPlaceHolder="Buscar" optionLabel="shortName">
-                <ng-template let-program pTemplate="item">
-                  <div class="hstack gap-2 w-100 m-0 align-items-center">
-                    <i class="bi bi-circle-fill" [style]="{color: program.color}"></i>
-                    <span>{{program.shortName}}</span>
-                  </div>
-                </ng-template>
-              </p-listbox>
-              <!-- <ul>
-                <li *ngFor="let element of city.cityData">
-                  {{element.shortName}}
-                </li>
-              </ul> -->
-            </p-tabPanel>
-          </p-tabView>
-        </ng-template>
+        </div>
+        <!-- Pestañas de los Almacenes -->
+        <div class="row">
+          <div *ngIf="this.programsByCity.loading; else tabs" class="d-flex justify-content-center">
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+          <ng-template #tabs>
+            <!-- <p class="h5">Agrega un filtro:</p> -->
+            <p-tabView>
+              <p-tabPanel *ngFor="let city of this.programsByCity.data" [header]="city.cityName">
+                <p-listbox [options]="city.cityData" (onChange)="listOnChange" [filter]="true"
+                  [style]="{'padding': '0'}" filterPlaceHolder="Buscar" optionLabel="shortName">
+                  <ng-template let-program pTemplate="item">
+                    <div class="hstack gap-2 w-100 m-0 align-items-center">
+                      <i class="bi bi-circle-fill" [style]="{color: program.color}"></i>
+                      <span>{{program.shortName}}</span>
+                    </div>
+                  </ng-template>
+                </p-listbox>
+                <!-- <ul>
+                  <li *ngFor="let element of city.cityData">
+                    {{element.shortName}}
+                  </li>
+                </ul> -->
+              </p-tabPanel>
+            </p-tabView>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
