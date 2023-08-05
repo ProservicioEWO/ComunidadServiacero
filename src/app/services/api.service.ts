@@ -3,6 +3,7 @@ import { Event } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Location } from '../models/Location';
+import { News } from '../models/News';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,16 @@ export class ApiService {
   getPrograms() {
     return this.get<any[]>({
       endpoint: "/programs?_append=city"
+    })
+  }
+
+  /**
+   * Obtiene una lista de las ultimas noticias
+   * @returns Un Observable que contiene la lista de las ultimas noticias
+   */
+  getLatestNews() {
+    return this.get<News[]>({
+      endpoint: '/news'
     })
   }
 

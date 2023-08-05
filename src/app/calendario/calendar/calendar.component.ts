@@ -13,11 +13,13 @@ export class CalendarComponent {
   locale = 'es'
 
   view: CalendarView = CalendarView.Month;
-  viewDate = new Date()
-
+  
   @Input() events: CalendarEvent[]
+  @Input() viewDate: Date
 
   setView(view: CalendarView) {
     this.view = view
   }
+
+
 }

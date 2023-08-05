@@ -1,22 +1,9 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import {
-  CalendarEvent,
-  CalendarMonthViewBeforeRenderEvent,
-  CalendarMonthViewDay,
-  CalendarView,
-  DAYS_OF_WEEK,
-} from 'angular-calendar';
-import { Subject, takeUntil } from 'rxjs';
+import _ from 'lodash';
 import { ApiService } from '../services/api.service';
-import _, { Dictionary } from 'lodash'
-import { City } from '../models';
+import { CalendarEvent } from 'angular-calendar';
+import { Component, OnInit } from '@angular/core';
 import { State } from '../utils/State';
-import { startOfMonth, startOfWeek, startOfDay, daysInWeek } from 'date-fns'
+import { Subject, takeUntil } from 'rxjs';
 
 const RED_CELL: 'red-cell' = 'red-cell';
 const BLUE_CELL: 'blue-cell' = 'blue-cell';
@@ -35,6 +22,7 @@ export class Calendario implements OnInit {
 
   private unsubscribe$ = new Subject<void>()
 
+  viewDate = new Date()
   newEvents: CalendarEvent[] = []
   programsByCity = {
     data: null,
@@ -42,6 +30,8 @@ export class Calendario implements OnInit {
     loading: true
   } as State<any>
   filter = false
+
+  selectedListItem: any = null
 
   constructor(private api: ApiService) { }
 
@@ -70,7 +60,8 @@ export class Calendario implements OnInit {
       })
   }
 
-  listOnChange(e: any){
+  listOnChange(e: any) {
     console.log(e)
+    this.viewDate = new Date(e.date)
   }
 }

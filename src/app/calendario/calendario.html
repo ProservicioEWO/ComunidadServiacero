@@ -40,7 +40,7 @@
             <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
           </div> -->
 
-        <app-calendar [events]="this.newEvents"></app-calendar>
+        <app-calendar [events]="this.newEvents" [viewDate]="this.viewDate"></app-calendar>
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -57,7 +57,8 @@
             <p-tabView>
               <p-tabPanel *ngFor="let city of this.programsByCity.data" [header]="city.cityName">
                 <p-listbox [options]="city.cityData" (onChange)="listOnChange" [filter]="true"
-                  [style]="{'padding': '0'}" filterPlaceHolder="Buscar" optionLabel="shortName">
+                  [style]="{'padding': '0'}" [(ngModel)]="this.selectedListItem" (ngModelChange)="listOnChange($event)"
+                  filterPlaceHolder="Buscar" optionLabel="shortName">
                   <ng-template let-program pTemplate="item">
                     <div class="hstack gap-2 w-100 m-0 align-items-center">
                       <i class="bi bi-circle-fill" [style]="{color: program.color}"></i>
@@ -80,7 +81,66 @@
 </div>
 
 <!-- Panel que muestra la información del curso -->
+<div *ngIf="!!this.selectedListItem" id="dvCurso" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col col-lg-10">
+      <h3 id="lbTitulo">{{this.selectedListItem.name}}</h3>
+    </div>
+    <div class="col-0 col-sm-0 col-md-0 col-lg-6 col-xl-6"></div>
+  </div>
 
+  <div class="row">
+    <div class="col col-lg-10">
+      <p id="lbDesc">{{this.selectedListItem.description}}</p>
+
+      <p class="h5">PLAN CURRICULAR:</p>
+      <p id="lbMaterias" [innerHTML]="this.selectedListItem.plan"></p>
+
+      <p class="h5">REQUISITOS DEL PROGRAMA:</p>
+      <p id="lbReq" [innerHTML]="this.selectedListItem.req"></p>
+
+    <div class="col col-lg-10">
+      <p class="h5">COSTO DEL PROGRAMA:</p>
+      <p id="lbCosto">{{this.selectedListItem.cost}}</p>
+
+      <p class="h5">¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
+      <p id="lbApoyo">{{this.selectedListItem.advantage}}</p>
+
+      <p id="lbDate1">
+        <span>Fecha inicio:</span>
+        {{this.selectedListItem.date}}
+      </p>
+      <p id="lbDate2">
+        <span>Fecha fin:</span>
+        {{this.selectedListItem.end}}
+      </p>
+
+      <p id="lbTime">
+        <span>Duración:</span>
+        {{this.selectedListItem.duration}}
+      </p>
+
+      <!-- <p id="lbCondiciones1">CONDICIONES DE APOYO:</p>
+      <p id="lbCondiciones2"></p> -->
+
+      <!-- <hr>
+      <img id="imgCurso" class="responsive" src=""> -->
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-md-auto">
+    <div class="vstack gap-2">
+      <a [href]="this.selectedListItem.mainLink" class="btn btn-primary" id="btSolitica">
+        Quiero Inscribirme
+      </a>
+      <a [href]="this.selectedListItem.rulesLink" class="btn btn-primary" id="btReglamento">
+        Consultar Política
+      </a>
+    </div>
+  </div>
+</div>
+</div>
 
 <!-- Enrutamiento y Footer -->
 <router-outlet></router-outlet>

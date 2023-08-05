@@ -1,0 +1,24 @@
+<ng-template #spinner>
+  <p-progressSpinner></p-progressSpinner>
+</ng-template>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" *ngIf="this.news$ | async; else spinner; let news">
+  <div *ngFor="let _new of news" class="col">
+    <a [href]="_new.link" class="text-decoration-none" target="_blank">
+      <p-card [header]="_new.title" styleClass="cardy">
+        <ng-template pTemplate="header">
+          <img alt="Card" [src]="_new.image" />
+        </ng-template>
+        <p [style]="{'text-align':'justify'}">{{_new.description}}</p>
+        <ng-template pTemplate="footer">
+          <div class="hstack">
+            <span class="text-muted fst-italic">{{_new.date}}</span>
+            <!-- <a [href]="_new.link" class="btn btn-primary ms-auto">
+              leer más <i class="bi bi-chevron-right"></i>
+            </a> -->
+          </div>
+        </ng-template>
+      </p-card>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+::ng-deep .cardy {
+  transition: background-color 0.2s ease-in, color 0.2s ease-in;
+
+  &:hover {
+    background-color: #56b3ff;
+    color: white !important;
+  }
+  
+  &:hover .text-muted{
+    color: white !important;
+  }
+}

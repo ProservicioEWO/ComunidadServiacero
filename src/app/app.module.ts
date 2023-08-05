@@ -16,6 +16,7 @@ import { AccordionModule } from 'primeng/accordion'
 import { BadgeModule } from 'primeng/badge'
 import { TabViewModule } from 'primeng/tabview';
 import { ListboxModule } from 'primeng/listbox';
+import { CardModule } from 'primeng/card'
 
 import { AppComponent } from './app.component';
 import { Calendario } from './calendario/calendario';
@@ -36,6 +37,7 @@ import { AuthService } from './services/auth.service';
 import { GaleriaDetalles } from './galeria/galeria-detalles/galeria-detalles.component';
 import { InstalacionesDetalles } from './instalaciones/instalaciones-detalles/instalaciones-detalles.component';
 import { ProgramasDetalles } from './programas/programas-detalles/programas-detalles.component';
+import { NewsListComponent } from './conocenos/news-list/news-list.component';
 
 registerLocaleData(localeEs)
 
@@ -55,7 +57,8 @@ registerLocaleData(localeEs)
     ValueComponent,
     GaleriaDetalles,
     InstalacionesDetalles,
-    ProgramasDetalles
+    ProgramasDetalles,
+    NewsListComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ registerLocaleData(localeEs)
     BadgeModule,
     TabViewModule,
     ListboxModule,
+    CardModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
