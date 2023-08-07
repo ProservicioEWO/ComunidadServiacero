@@ -1,0 +1,17 @@
+<ng-template #loading>
+  <div *ngFor="let element of [1,2,3]">
+    <p-skeleton></p-skeleton>
+  </div>
+</ng-template>
+<div *ngIf="this.testimonials$ | async; let testimonials; else loading">
+  <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="1" [circular]="true"
+    [responsiveOptions]="this.responsiveOptionsCorousel">
+    <ng-template let-testimonial pTemplate="item">
+      <p-card [header]="testimonial.name" [subheader]="testimonial.entity" [style]="{'margin': '0 0.5em'}">
+        <p class="m-0" [style]="{'min-height': '100%'}">
+          {{testimonial.description}}
+        </p>
+      </p-card>
+    </ng-template>
+  </p-carousel>
+</div>

@@ -1,0 +1,14 @@
+<!-- <ng-image-slider *ngIf="this." [images]="this" [imageSize]="{width: '100%', height: height}" [infinite]="true"
+  [animationSpeed]="3" [autoSlide]="8">
+</ng-image-slider> -->
+
+<ng-template #loading>
+  <p-progressSpinner></p-progressSpinner>
+</ng-template>
+<div class="gallery-frame" *ngIf="this.images$ | async; let images; else loading">
+  <p-galleria [value]="images" [showItemNavigators]="true" [showThumbnails]="false" [circular]="true" [autoPlay]="true">
+    <ng-template pTemplate="item" let-image>
+      <img [src]="image" style="width: 100%;" />
+    </ng-template>
+  </p-galleria>
+</div>
