@@ -8,7 +8,9 @@
 <div class="gallery-frame" *ngIf="this.images$ | async; let images; else loading">
   <p-galleria [value]="images" [showItemNavigators]="true" [showThumbnails]="false" [circular]="true" [autoPlay]="true">
     <ng-template pTemplate="item" let-image>
-      <img [src]="image" style="width: 100%;" />
+      <div [style]="{'min-height': '10em'}">
+        <img [src]="image" style="width: 100%;" />
+      </div>
     </ng-template>
   </p-galleria>
 </div>
