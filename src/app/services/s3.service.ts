@@ -29,7 +29,7 @@ export class S3Service {
     })
   }
 
-  getImage(key: string){
+  getObject(key: string){
     const image = getSignedUrl(this.s3Client, new GetObjectCommand({
       Bucket: 'cs-static-res',
       Key: key
@@ -37,7 +37,7 @@ export class S3Service {
     return from(image)
   }
 
-  getImages(path: string) {
+  getObjects(path: string) {
     const list = this.s3Client.send(new ListObjectsV2Command({
       Bucket: 'cs-static-res',
       Prefix: path

@@ -15,45 +15,45 @@
   </div>
 </div>
 
-<div *ngIf="this.eventsState.loading; else eventsButtons" class="d-flex justify-content-center mt-5">
-  <p-progressSpinner></p-progressSpinner>
-</div>
-<ng-template #eventsButtons>
-  <div class="container mt-5 mb-3">
-    <div class="row">
-      <div class="col-md-12" style="height: 100%; background-color: white">
-        <ul class="nav nav-pills justify-content-center">
-          <li class="nav-item" *ngFor="let event of this.eventsState.data">
-            <a class="nav-link" href="#" [routerLink]="['/galeria', event.id]" routerLinkActive="active">
-              {{event.name}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+<ng-template #eventsLoading>
+  <div class="d-flex justify-content-center mt-5">
+    <p-progressSpinner></p-progressSpinner>
   </div>
 </ng-template>
+
+<div *ngIf="this.events$ | async; let events; else eventsLoading" class="container mt-5 mb-3">
+  <div class="row">
+    <div class="col-md-12" style="height: 100%; background-color: white">
+      <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item" *ngFor="let event of events">
+          <a class="nav-link" href="#" [routerLink]="['/galeria', event.id]" routerLinkActive="active">
+            {{event.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 <router-outlet></router-outlet>
 
 <div class="container" style="margin-top: 50px;">
-  <div *ngIf="this.videoState.loading; else videoCont" class="d-flex justify-content-center mt-5">
-    <p-progressSpinner></p-progressSpinner>
-  </div>
-  <ng-template #videoCont>
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
-        <h5>¿Qué es Comunidad Serviacero?</h5>
-        <div class="video">
-          <video controls #videoPlayer style="width: 100%;">
-            <source [src]="this.videoState.data" type="video/mp4" />
-            Browser not supported
-          </video>
-        </div>
-      </div>
-      <div class="col-lg-2"></div>
+  <ng-template #videoLoading>
+    <div class="d-flex justify-content-center mt-5">
+      <p-progressSpinner></p-progressSpinner>
     </div>
   </ng-template>
+  <div *ngIf="this.video$ | async; let video; else videoLoading" class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <h5>¿Qué es Comunidad Serviacero?</h5>
+      <div class="video">
+        <video controls #videoPlayer style="width: 100%;">
+          <source [src]="video" type="video/mp4" />
+          Browser not supported
+        </video>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
 </div>
-<app-footer></app-footer>

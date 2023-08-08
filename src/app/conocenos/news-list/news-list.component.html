@@ -1,7 +1,17 @@
 <ng-template #spinner>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
     <div *ngFor="let element of [1,2,3,4]" class="col">
-      <p-skeleton height="35em"></p-skeleton>
+      <div class="border-round border-1 surface-border surface-card" [style]="{'height':'35em'}">
+        <p-skeleton width="100%" height="10em"></p-skeleton>
+        <div class="p-4 mb-2">
+          <p-skeleton width="20em" height="1em" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="14em" height="1em" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="12em" height="1em" styleClass="mb-2"></p-skeleton>
+        </div>
+        <div class="p-4">
+          <p-skeleton *ngFor="let e of [1,2,3,4,5]" width="100%" styleClass="mb-2"></p-skeleton>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
@@ -14,7 +24,9 @@
           <ng-template pTemplate="header">
             <img alt="Card" [src]="_new.image" />
           </ng-template>
-          <p [style]="{'text-align':'justify'}">{{_new.description}}</p>
+          <ng-template pTemplate="body">
+            <p [style]="{'text-align':'justify'}">{{_new.description}}</p>
+          </ng-template>
           <ng-template pTemplate="footer">
             <div class="hstack">
               <span class="text-muted fst-italic">{{_new.date}}</span>

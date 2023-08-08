@@ -6,7 +6,6 @@ import {
 } from 'amazon-cognito-identity-js';
 import { Injectable } from '@angular/core';
 import AuthFailureError from '../errors/AuthFailureError';
-import { reject } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,26 @@ export class AuthService {
 
   public loadingSignin = false
 
+  get userId() {
+    try {
+      const currentUser = this.userPool.getCurrentUser()
+      if (!currentUser) {
+        throw new AuthFailureError()
+      }
+      return new Promise<string>((resolve, reject) => {
+        currentUser.getUserAttributes((err, attrs) => {
+          if (err) reject(err)
+          else {
+            const sub = attrs!.find(e => e.Name === 'sub')!.Value
+            resolve(sub)
+          }
+        })
+      })
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   get accessToken() {
     try {
       const currentUser = this.userPool.getCurrentUser()
@@ -27,9 +46,8 @@ export class AuthService {
       }
       return new Promise<string>((resolve, reject) => {
         currentUser.getSession((err: any, session: CognitoUserSession) => {
-          if (err) {
-            reject(err)
-          } else {
+          if (err) reject(err)
+          else {
             const accessToken = session.getAccessToken().getJwtToken()
             resolve(accessToken)
           }

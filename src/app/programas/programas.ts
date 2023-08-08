@@ -3,6 +3,7 @@ import { ApiService } from "../services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { State } from "../utils/State";
 import _ from "lodash"
+import { Observable, map } from "rxjs";
 
 @Component({
   selector: 'app-programas',
@@ -11,32 +12,26 @@ import _ from "lodash"
 })
 
 export class Programas implements OnInit {
+  cityGroups$: Observable<CityGroup[]>
+
   queryParams = {}
   sectionId: number | null = null
   currentTabIndex: number | null = null
-  cityGroupState = {
-    data: null,
-    error: null,
-    loading: false
-  } as State<CityGroup[]>
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private api: ApiService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.sectionId = Number(params.get("variable"))
       if (this.sectionId) {
-        this.cityGroupState.loading = true
-        this.api.getProgramsBySection(this.sectionId).subscribe({
-          next: (data) => {
-            this.cityGroupState.data = _(data)
+        this.cityGroups$ = this.api.getProgramsBySection(this.sectionId)
+          .pipe(
+            map(arr => _(arr)
               .groupBy("city.name")
               .map<CityGroup>((programs, name) => ({ name, programs }))
               .value()
-          },
-          error: (err) => this.cityGroupState.error = err,
-          complete: () => this.cityGroupState.loading = false
-        })
+            )
+          )
       }
     })
 

@@ -1,10 +1,13 @@
-import { City } from '../models/City';
-import { Event } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Location } from '../models/Location';
-import { News } from '../models/News';
-import { Testimonial } from '../models/Testimonial';
+import {
+  City,
+  Event,
+  Location,
+  Log,
+  News,
+  Testimonial
+} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +76,7 @@ export class ApiService {
       endpoint: '/news'
     })
   }
-  
+
   /**
    * Obtiene una lista de las ultimas noticias
    * @returns Un Observable que contiene la lista de las ultimas noticias
@@ -95,7 +98,7 @@ export class ApiService {
   }
 
   getProgramById(id: string) {
-    return this.get<any[]>({
+    return this.get<any>({
       endpoint: `/programs/${id}`
     })
   }
@@ -111,12 +114,32 @@ export class ApiService {
     })
   }
 
-  private get<T>({ endpoint }: ApiOptions) {
+  /**
+   * Inserta un registro (log) en la base de datos
+   * @param log la informacion de log
+   * @returns Un observable que contiene informacion del log insertado
+   */
+  postLog(log: Log) {
+    return this.post<Log>({
+      endpoint: `/logs`,
+      body: log
+    })
+  }
+
+  private get<T>({ endpoint }: ApiGetOptions) {
     return this.http.get<T>(`${this.apiBaseUrl}${endpoint}`)
   }
 
+  private post<T>({ endpoint, body }: ApiPostOptions<T>) {
+    return this.http.post(`${this.apiBaseUrl}${endpoint}`, body)
+  }
 }
 
-interface ApiOptions {
+interface ApiGetOptions {
   endpoint: string,
+}
+
+interface ApiPostOptions<T> {
+  endpoint: string,
+  body: T
 }

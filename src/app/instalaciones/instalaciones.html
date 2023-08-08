@@ -12,18 +12,16 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-  <p-progressSpinner *ngIf="this.citiesState.loading; else citiesContent"></p-progressSpinner>
-  <ng-template #citiesContent>
-    <div class="d-table shadow p-3 rounded-3">
-      <div class="d-table-row">
-        <div *ngFor="let city of this.citiesState.data" class="d-table-cell px-3 py-1 city-button">
-          <a class="nav-link" [routerLink]="['/instalaciones', city.id]" routerLinkActive="active">{{city.name}}</a>
-        </div>
+  <ng-template #citiesLoading>
+    <p-progressSpinner></p-progressSpinner>
+  </ng-template>
+  <div *ngIf="this.cities$ | async; let cities; else citiesLoading" class="d-table shadow p-3 rounded-3">
+    <div class="d-table-row">
+      <div *ngFor="let city of cities" class="d-table-cell px-3 py-1 city-button">
+        <a class="nav-link" [routerLink]="['/instalaciones', city.id]" routerLinkActive="active">{{city.name}}</a>
       </div>
     </div>
-  </ng-template>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
-
-<app-footer></app-footer>

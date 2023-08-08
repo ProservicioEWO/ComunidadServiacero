@@ -21,26 +21,8 @@
     <div class="row g-4">
 
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8" id="dvPcal">
-        <!-- Calendario -->
-        <!-- <div class="col-sm-4 col-md-6 col-lg-6 col-xl-6">
-            <div class="btn-group">
-              <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="">
-                Anterior
-              </div>
-              <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-                Hoy
-              </div>
-              <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-                Siguiente
-              </div>
-            </div>
-          </div> -->
-
-        <!--  <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
-            <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
-          </div> -->
-
-        <app-calendar [events]="this.newEvents" [viewDate]="this.viewDate"></app-calendar>
+        <app-calendar [events]="this.newEvents" [viewDate]="this.viewDate" (onViewChange)="handleViewChange($event)">
+        </app-calendar>
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -53,7 +35,6 @@
             <p-progressSpinner></p-progressSpinner>
           </div>
           <ng-template #tabs>
-            <!-- <p class="h5">Agrega un filtro:</p> -->
             <p-tabView>
               <p-tabPanel *ngFor="let city of this.programsByCity.data" [header]="city.cityName">
                 <p-listbox [options]="city.cityData" (onChange)="listOnChange" [filter]="true"
@@ -66,11 +47,6 @@
                     </div>
                   </ng-template>
                 </p-listbox>
-                <!-- <ul>
-                  <li *ngFor="let element of city.cityData">
-                    {{element.shortName}}
-                  </li>
-                </ul> -->
               </p-tabPanel>
             </p-tabView>
           </ng-template>
@@ -99,49 +75,42 @@
       <p class="h5">REQUISITOS DEL PROGRAMA:</p>
       <p id="lbReq" [innerHTML]="this.selectedListItem.req"></p>
 
-    <div class="col col-lg-10">
-      <p class="h5">COSTO DEL PROGRAMA:</p>
-      <p id="lbCosto">{{this.selectedListItem.cost}}</p>
+      <div class="col col-lg-10">
+        <p class="h5">COSTO DEL PROGRAMA:</p>
+        <p id="lbCosto">{{this.selectedListItem.cost}}</p>
 
-      <p class="h5">¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
-      <p id="lbApoyo">{{this.selectedListItem.advantage}}</p>
+        <p class="h5">¿QUÉ APOYO TE OTORGARÁ SERVIACERO?</p>
+        <p id="lbApoyo">{{this.selectedListItem.advantage}}</p>
 
-      <p id="lbDate1">
-        <span>Fecha inicio:</span>
-        {{this.selectedListItem.date}}
-      </p>
-      <p id="lbDate2">
-        <span>Fecha fin:</span>
-        {{this.selectedListItem.end}}
-      </p>
+        <p id="lbDate1">
+          <span>Fecha inicio:</span>
+          {{this.selectedListItem.date}}
+        </p>
+        <p id="lbDate2">
+          <span>Fecha fin:</span>
+          {{this.selectedListItem.end}}
+        </p>
 
-      <p id="lbTime">
-        <span>Duración:</span>
-        {{this.selectedListItem.duration}}
-      </p>
-
-      <!-- <p id="lbCondiciones1">CONDICIONES DE APOYO:</p>
-      <p id="lbCondiciones2"></p> -->
-
-      <!-- <hr>
-      <img id="imgCurso" class="responsive" src=""> -->
+        <p id="lbTime">
+          <span>Duración:</span>
+          {{this.selectedListItem.duration}}
+        </p>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col col-md-auto">
-    <div class="vstack gap-2">
-      <a [href]="this.selectedListItem.mainLink" class="btn btn-primary" id="btSolitica">
-        Quiero Inscribirme
-      </a>
-      <a [href]="this.selectedListItem.rulesLink" class="btn btn-primary" id="btReglamento">
-        Consultar Política
-      </a>
+  <div class="row">
+    <div class="col col-md-auto">
+      <div class="vstack gap-2">
+        <a [href]="this.selectedListItem.mainLink" class="btn btn-primary" id="btSolitica">
+          Quiero Inscribirme
+        </a>
+        <a [href]="this.selectedListItem.rulesLink" class="btn btn-primary" id="btReglamento">
+          Consultar Política
+        </a>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- Enrutamiento y Footer -->
 <router-outlet></router-outlet>
-<app-footer></app-footer>

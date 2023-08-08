@@ -21,8 +21,10 @@
       <div class="col-sm-1 col-md-2 col-lg-1 col-xl-1">
       </div>
       <div class="col-sm-10 col-md-8 col-lg-10 col-xl-10 text-center">
-        <p style="color: black; font-weight: 600;">Comunidad Serviacero ofrece programas que puedes tomar y participar
-          para mejorar tu desarrollo personal y profesional</p>
+        <p class="text-black fw-bold">
+          Comunidad Serviacero ofrece programas que puedes tomar y participar
+          para mejorar tu desarrollo personal y profesional
+        </p>
       </div>
       <div class="col-sm-1 col-md-2 col-lg-1 col-xl-1"></div>
     </div>
@@ -73,31 +75,28 @@
         </div>
       </div>
     </div>
-    <div *ngIf="this.cityGroupState.loading; else programsCont" class="vstack align-items-center mt-5">
-      <p-progressSpinner></p-progressSpinner>
-      <span>cargando programas</span>
-    </div>
-    <ng-template #programsCont>
-      <p-accordion [activeIndex]="0" [(activeIndex)]="this.currentTabIndex"
-        (activeIndexChange)="handleChangeIndex($event)">
-        <p-accordionTab *ngFor="let cityGroup of this.cityGroupState.data" [header]="cityGroup.name">
-          <div class="row row-cols-2">
-            <div *ngFor="let program of cityGroup.programs" class="col">
-              <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
-                routerLinkActive="active" class="text-decoration-none text-black p-2">
-                <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
-                  [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
-                {{program.shortName}}
-              </a>
-            </div>
-          </div>
-        </p-accordionTab>
-      </p-accordion>
+    <ng-template #programsLoading>
+      <div *ngIf="this.sectionId" class="vstack align-items-center mt-5">
+        <p-progressSpinner></p-progressSpinner>
+      </div>
     </ng-template>
+    <p-accordion *ngIf="this.cityGroups$ | async; let cityGroups; else programsLoading" [activeIndex]="0"
+      [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
+      <p-accordionTab *ngFor="let cityGroup of cityGroups" [header]="cityGroup.name">
+        <div class="row row-cols-2">
+          <div *ngFor="let program of cityGroup.programs" class="col">
+            <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
+              routerLinkActive="active" class="text-decoration-none text-black p-2">
+              <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
+                [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
+              {{program.shortName}}
+            </a>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
 
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="this.cityGroups$ | async"></router-outlet>
 
   </div>
 </div>
-
-<app-footer></app-footer>

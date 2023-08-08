@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { State } from 'src/app/utils/State';
 import { AuthService } from 'src/app/services/auth.service';
 import { ApiService } from 'src/app/services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-programas-detalles',
@@ -10,11 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./programas-detalles.component.scss']
 })
 export class ProgramasDetalles implements OnInit {
-  programaState = {
-    data: null,
-    error: null,
-    loading: false
-  } as State<any>
+  programDetail$: Observable<any>
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private api: ApiService) { }
 
@@ -22,12 +19,7 @@ export class ProgramasDetalles implements OnInit {
     this.route.paramMap.subscribe(params => {
       const programId = params.get("variable")
       if (programId) {
-        this.programaState.loading = true
-        this.api.getProgramById(programId).subscribe({
-          next: (data) => this.programaState.data = data,
-          error: (err) => this.programaState.error = err,
-          complete: () => this.programaState.loading = false,
-        })
+        this.programDetail$ = this.api.getProgramById(programId)
       }
     })
   }

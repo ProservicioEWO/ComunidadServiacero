@@ -1,13 +1,10 @@
 import _ from 'lodash';
 import { ApiService } from '../services/api.service';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Component, OnInit } from '@angular/core';
 import { State } from '../utils/State';
 import { Subject, takeUntil } from 'rxjs';
 
-const RED_CELL: 'red-cell' = 'red-cell';
-const BLUE_CELL: 'blue-cell' = 'blue-cell';
-const DEF_CELL: 'ng-star-inserted' = 'ng-star-inserted';
 
 @Component({
   selector: 'app-calendario',
@@ -61,7 +58,12 @@ export class Calendario implements OnInit {
   }
 
   listOnChange(e: any) {
-    console.log(e)
     this.viewDate = new Date(e.date)
+  }
+
+  handleViewChange(date: Date) {
+    if (this.viewDate !== date) {
+      this.selectedListItem = null
+    }
   }
 }

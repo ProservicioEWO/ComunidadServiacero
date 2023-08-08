@@ -2,14 +2,15 @@
   <div class="col-sm-4 col-md-6 col-lg-6 col-xl-6 align-self-center">
     <div class="btn-group w-100 m-0" role="group">
       <button type="button" class="btn btn-primary" mwlCalendarPreviousView [view]="this.view"
-        [(viewDate)]="this.viewDate">
+        [(viewDate)]="this.viewDate" (click)="handleViewChange()">
         <i class="bi bi-chevron-left"></i>
       </button>
       <button type="button" class="btn btn-outline-primary" mwlCalendarToday [value]="this.view"
-        [(viewDate)]="this.viewDate">
+        [(viewDate)]="this.viewDate" (click)="handleViewChange()">
         <i class="bi bi-calendar-date"></i>
       </button>
-      <button type="button" class="btn btn-primary" mwlCalendarNextView [view]="this.view" [(viewDate)]="this.viewDate">
+      <button type="button" class="btn btn-primary" mwlCalendarNextView [view]="this.view" [(viewDate)]="this.viewDate"
+        (click)="handleViewChange()">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
@@ -20,7 +21,7 @@
     </div>
   </div>
 </div>
-<div class="row" [ngSwitch]="view">
-  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="this.viewDate" [locale]="this.locale" [events]="this.events">
+<div class="row">
+  <mwl-calendar-month-view [viewDate]="this.viewDate" [locale]="this.locale" [events]="this.events">
   </mwl-calendar-month-view>
 </div>

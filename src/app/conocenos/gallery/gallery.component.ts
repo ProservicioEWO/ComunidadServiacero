@@ -16,7 +16,7 @@ export class GalleryComponent implements OnInit {
   constructor(private s3: S3Service) {}
   
   ngOnInit() {
-    this.images$ = this.s3.getImages('images/banner/')
+    this.images$ = this.s3.getObjects('images/banner/')
   }
 
 }
