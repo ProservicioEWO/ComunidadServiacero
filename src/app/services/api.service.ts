@@ -55,6 +55,16 @@ export class ApiService {
   }
 
   /**
+   * Obtiene una lista de programas
+   * @returns Un Observable que contiene la lista de eventos
+   */
+  getInternalPrograms() {
+    return this.get<any[]>({
+      endpoint: "/programs?_append=city&type=i"
+    })
+  }
+
+  /**
    * Obtiene una lista de las ultimas noticias
    * @returns Un Observable que contiene la lista de las ultimas noticias
    */

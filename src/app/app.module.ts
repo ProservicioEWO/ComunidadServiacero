@@ -19,6 +19,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { CardModule } from 'primeng/card'
 import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel'
+import { DataViewModule } from 'primeng/dataview'
 
 import { AppComponent } from './app.component';
 import { Calendario } from './calendario/calendario';
@@ -42,6 +43,7 @@ import { ProgramasDetalles } from './programas/programas-detalles/programas-deta
 import { NewsListComponent } from './conocenos/news-list/news-list.component';
 import { GalleryComponent } from './conocenos/gallery/gallery.component';
 import { TestimonialsListComponent } from './conocenos/testimonials-list/testimonials-list.component';
+import { NextProgramsComponent } from './conocenos/next-programs/next-programs.component';
 
 registerLocaleData(localeEs)
 
@@ -64,7 +66,8 @@ registerLocaleData(localeEs)
     ProgramasDetalles,
     NewsListComponent,
     GalleryComponent,
-    TestimonialsListComponent
+    TestimonialsListComponent,
+    NextProgramsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ registerLocaleData(localeEs)
     TabViewModule,
     ListboxModule,
     CardModule,
+    DataViewModule,
     CarouselModule,
     SkeletonModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),

@@ -1,0 +1,44 @@
+<ng-template #loading>
+  <p-progressSpinner></p-progressSpinner>
+</ng-template>
+
+<div *ngIf="this.programs$ | async; let programs; else loading" class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h6 class="h6 text-muted">Tu mejor decisión</h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2 class="display-6 fw-semibold">Próximos Cursos</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <p-dataView #dv [value]="programs" sortField="date"
+        emptyMessage="Por el momento, no se encuentran programados cursos próximos. Te sugerimos estar atento para futuras actualizaciones.">
+        <ng-template let-program pTemplate="listItem">
+          <div class="hstack gap-4 p-2 align-items-center">
+            <div [style]="{'width':'80px','height':'80px', 'border-radius': '50%', 'overflow':'hidden'}">
+              <img [style]="{'width':'100%'}"
+                src="https://comunidadserviacero.com/assets/Imagenes/homeweb/finanzas.png" />
+            </div>
+            <div class="fs-3 fw-bold">{{program.shortName}}</div>
+            <div class="hstack gap-2 align-items-center">
+              <i class="bi bi-clock"></i>
+              <div class="fs-5 fw-light">{{program.date}}</div>
+            </div>
+            <div class="hstack gap-2 align-items-center">
+              <i class="bi bi-person-workspace"></i>
+              <div class="fs-5 fw-light">formato presencial</div>
+            </div>
+            <div class="hstack gap-2 align-items-center">
+              <i class="bi bi-pin-map"></i>
+              <div class="fs-5 fw-light">{{program.city.name}}</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </div>
+</div>
