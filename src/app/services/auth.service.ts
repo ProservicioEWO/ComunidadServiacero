@@ -25,12 +25,18 @@ export class AuthService {
         throw new AuthFailureError()
       }
       return new Promise<string>((resolve, reject) => {
-        currentUser.getUserAttributes((err, attrs) => {
-          if (err) reject(err)
-          else {
-            const sub = attrs!.find(e => e.Name === 'sub')!.Value
-            resolve(sub)
+        currentUser.getSession((err, session) => {
+          if (err) {
+            reject(err)
+            return
           }
+          currentUser.getUserAttributes((err, attrs) => {
+            if (err) reject(err)
+            else {
+              const sub = attrs!.find(e => e.Name === 'sub')!.Value
+              resolve(sub)
+            }
+          })
         })
       })
     } catch (error) {

@@ -6,6 +6,6 @@ export enum LogType {
 export interface Log {
   date: string,
   type: LogType,
-  moduleId: string,
   userId: string
+  moduleId?: string,
 }

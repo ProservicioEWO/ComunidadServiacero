@@ -5,6 +5,9 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 import values from './values';
+import { ApiService } from '../services/api.service';
+import { formatDate } from '@angular/common';
+import { LogType } from '../models/Log';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,12 @@ export class LoginComponent {
   username = new FormControl("", Validators.required)
   password = new FormControl("", Validators.required)
 
-  constructor(public auth: AuthService, private router: Router, private messageServicer: MessageService) {
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private api: ApiService,
+    private messageServicer: MessageService
+  ) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -33,7 +41,14 @@ export class LoginComponent {
           this.username.value ?? "",
           this.password.value ?? "",
         )
-        console.log(result)
+        const userId = await this.auth.userId
+        this.api.postLog({
+          date: formatDate(new Date(), "yyyy-MM-dd HH:mm:ss", "en-MX"),
+          type: LogType.LOGIN,
+          userId
+        }).subscribe({
+          error: (error) => console.log(error)
+        })
         this.router.navigate(["/home"])
       } catch (error) {
         this.messageServicer.add({
