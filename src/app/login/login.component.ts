@@ -38,8 +38,8 @@ export class LoginComponent {
     if (!this.loginForm.invalid) {
       try {
         const result = await this.auth.login(
-          this.username.value ?? "",
-          this.password.value ?? "",
+          this.username.value!,
+          this.password.value!,
         )
         const userId = await this.auth.userId
         this.api.postLog({
