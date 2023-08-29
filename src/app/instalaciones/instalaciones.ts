@@ -15,18 +15,18 @@ import { S3Service } from '../services/s3.service';
   styleUrls: ['./instalaciones.css'],
 })
 export class Instalaciones implements OnInit {
-  cities$: Observable<City[]>
+  sites$: Observable<City[]>
 
   curentCity: string | null = null
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private s3: S3Service) { }
+  constructor(private route: ActivatedRoute, private api: ApiService) { }
 
   get hasParam() {
     return !!this.route.snapshot.paramMap.keys.length
   }
 
   ngOnInit() {
-    this.cities$ = this.api.getCities()
+    this.sites$ = this.api.getSites()
   }
 }
 

@@ -26,6 +26,16 @@ export class ApiService {
       endpoint: "/cities?_join=locations"
     })
   }
+  
+  /**
+   * Obtiene una lista de los centros de servicio (sustituo de ciudades) y sus respectivas instalaciones
+   * @returns Un Observable que contiene la lista de ciudades
+   */
+  getSites() {
+    return this.get<City[]>({
+      endpoint: "/sites?_join=locations"
+    })
+  }
 
   /**
    * Obtiene una lista de instalaciones
@@ -104,13 +114,13 @@ export class ApiService {
   }
 
   /**
-   * Obtiene las instalaciones que pertenecen a una determinada ciudad
+   * Obtiene las instalaciones que pertenecen a una determinado centro de servicio (sistuto de ciudad)
    * @param cityId El ID de la ciudad a consultar
    * @returns Un Observable que contiene la lista de instalaciones
    */
-  getLocationsByCity(cityId: string) {
+  getLocationsBySite(cityId: string) {
     return this.get<Location[]>({
-      endpoint: `/cities/${cityId}/locations`
+      endpoint: `/sites/${cityId}/locations`
     })
   }
 

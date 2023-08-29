@@ -26,9 +26,9 @@ export class InstalacionesDetalles implements OnInit {
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
-        let cityId = params.get("variable")
-        if (cityId) {
-          this.locations$ = this.api.getLocationsByCity(cityId).pipe(
+        let siteId = params.get("variable")
+        if (siteId) {
+          this.locations$ = this.api.getLocationsBySite(siteId).pipe(
             switchMap(arr => (
               forkJoin(
                 arr.map<Observable<NLocation>>(

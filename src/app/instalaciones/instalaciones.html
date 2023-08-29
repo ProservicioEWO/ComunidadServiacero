@@ -12,13 +12,13 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-  <ng-template #citiesLoading>
+  <ng-template #sitesLoading>
     <p-progressSpinner></p-progressSpinner>
   </ng-template>
-  <div *ngIf="this.cities$ | async; let cities; else citiesLoading" class="d-table shadow p-3 rounded-3">
+  <div *ngIf="this.sites$ | async; let sites; else sitesLoading" class="d-table shadow p-3 rounded-3">
     <div class="d-table-row">
-      <div *ngFor="let city of cities" class="d-table-cell px-3 py-1 city-button">
-        <a class="nav-link" [routerLink]="['/instalaciones', city.id]" routerLinkActive="active">{{city.name}}</a>
+      <div *ngFor="let site of sites" class="d-table-cell px-3 py-1 city-button">
+        <a class="nav-link" [routerLink]="['/instalaciones', site.id]" routerLinkActive="active">{{site.name}}</a>
       </div>
     </div>
   </div>
