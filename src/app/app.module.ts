@@ -44,6 +44,7 @@ import { LoginComponent } from './login/login.component';
 import { ValueComponent } from './login/value/value.component';
 import { ProgramasDetalles } from './programas/programas-detalles/programas-detalles.component';
 import { AuthService } from './services/auth.service';
+import { HomeComponent } from './home/home.component';
 
 registerLocaleData(localeEs)
 
@@ -67,7 +68,8 @@ registerLocaleData(localeEs)
     NewsListComponent,
     GalleryComponent,
     TestimonialsListComponent,
-    NextProgramsComponent
+    NextProgramsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

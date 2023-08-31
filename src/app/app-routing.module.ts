@@ -11,15 +11,17 @@ import { LoginComponent } from './login/login.component';
 import { Programas } from './programas/programas';
 import { InstalacionesDetalles } from './instalaciones/instalaciones-detalles/instalaciones-detalles.component';
 import { ProgramasDetalles } from './programas/programas-detalles/programas-detalles.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [LoginAccessGuard]
+    canActivate: [LoginAccessGuard],
   },
   {
     path: '',
+    component: HomeComponent,
     canActivate: [UserAccessGuard],
     children: [
       { path: 'home/:variable', component: Conocenos },
