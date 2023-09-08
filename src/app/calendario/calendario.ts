@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import { ApiService } from '../services/api.service';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Component, OnInit } from '@angular/core';
-import { State } from '../utils/State';
 import { Subject, takeUntil } from 'rxjs';
 
+import { ApiService } from '../services/api.service';
+import { State } from '../utils/State';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-calendario',
@@ -43,8 +43,8 @@ export class Calendario implements OnInit {
           this.programsByCity.data = transformedData
           const calEvnts = onlyInternal.map<CalendarEvent>(e => ({
             title: e.shortName,
-            start: new Date(e.date),
-            end: new Date(e.end),
+            start: this.tiempo(new Date(e.date)), 
+            end: this.tiempo(new Date(e.end)),
             color: {
               primary: e.color,
               secondary: e.color
@@ -55,6 +55,11 @@ export class Calendario implements OnInit {
         error: (error) => this.programsByCity.error = error,
         complete: () => this.programsByCity.loading = false
       })
+  }
+
+  tiempo(date: Date): Date {
+    date.setDate(date.getDate() + 1);
+    return date;
   }
 
   listOnChange(e: any) {
