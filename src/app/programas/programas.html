@@ -84,7 +84,7 @@
       [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
       <p-accordionTab *ngFor="let cityGroup of cityGroups" [header]="cityGroup.name">
         <div class="row row-cols-2">
-          <div *ngFor="let program of cityGroup.programs" class="col">
+          <div *ngFor="let program of cityGroup.programs" class="col mb-3">
             <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
               routerLinkActive="active" class="text-decoration-none text-black p-2">
               <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
