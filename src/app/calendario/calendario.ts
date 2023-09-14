@@ -9,6 +9,7 @@ import { ApiService } from '../services/api.service';
 import { State } from '../utils/State';
 import _ from 'lodash';
 import { RRule } from 'rrule';
+import { Frecuency } from '../utils/Frecuency';
 
 @Component({
   selector: 'app-calendario',
@@ -20,23 +21,6 @@ import { RRule } from 'rrule';
 export class Calendario implements OnInit {
 
   private unsubscribe$ = new Subject<void>()
-
-  testEvents = [
-    {
-      title: 'Pruebita',
-      rrule: {
-        freq: RRule.DAILY,
-        dtstart: '2023-09-12',
-        until: '2023-09-29'
-      },
-      color: 'yellow'
-    },
-    {
-      start: '2023-09-12',
-      end: '2023-09-19',
-      color: '#00eea4'
-    },
-  ]
 
   options: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -52,7 +36,7 @@ export class Calendario implements OnInit {
   }
 
   viewDate = new Date()
-  newEvents: CalendarEvent[] = []
+  newEvents: any[] = []
   programsByCity = {
     data: null,
     error: null,
@@ -72,15 +56,25 @@ export class Calendario implements OnInit {
           const onlyInternal = data.filter(e => e.type === "i")
           const transformedData = Object.entries(_.groupBy(onlyInternal, "city.name")).map(([cityName, cityData]) => ({ cityName, cityData }))
           this.programsByCity.data = transformedData
-          const calEvnts = onlyInternal.map<CalendarEvent>(e => ({
-            title: e.shortName,
-            start: this.tiempo(new Date(e.date)),
-            end: this.tiempo(new Date(e.end)),
-            color: {
-              primary: e.color,
-              secondary: e.color
-            }
-          }))
+          const calEvnts = onlyInternal.map(e => (
+            e.days.length < 7 ?
+              {
+                title: e.shortName,
+                rrule: {
+                  freq: e.frequency,
+                  ...(e.frequency === Frecuency.W && { byweekday: e.days }),
+                  dtstart: this.tiempo(new Date(e.date)),
+                  until: this.tiempo(new Date(e.end)),
+                },
+                color: e.color
+              } :
+              {
+                title: e.shortName,
+                start: this.tiempo(new Date(e.date)),
+                end: this.tiempo(new Date(e.end)),
+                color: e.color
+              }
+          ))
           this.newEvents = calEvnts
         },
         error: (error) => this.programsByCity.error = error,
@@ -95,11 +89,5 @@ export class Calendario implements OnInit {
 
   listOnChange(e: any) {
     this.viewDate = new Date(e.date)
-  }
-
-  handleViewChange(date: Date) {
-    if (this.viewDate !== date) {
-      this.selectedListItem = null
-    }
   }
 }
