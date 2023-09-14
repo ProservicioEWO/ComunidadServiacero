@@ -21,8 +21,10 @@
     <div class="row g-4">
 
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8" id="dvPcal">
-        <app-calendar [events]="this.newEvents" [viewDate]="this.viewDate" (onViewChange)="handleViewChange($event)">
-        </app-calendar>
+        <!-- <app-calendar [events]="this.newEvents" [viewDate]="this.viewDate" (onViewChange)="handleViewChange($event)">
+        </app-calendar> -->
+
+        <full-calendar [options]="this.options" [events]="this.testEvents"></full-calendar>
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">

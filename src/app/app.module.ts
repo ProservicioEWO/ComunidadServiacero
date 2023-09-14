@@ -20,6 +20,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
+import { FullCalendarModule } from '@fullcalendar/angular'
 
 import { AppComponent } from './app.component';
 import { Calendario } from './calendario/calendario';
@@ -92,6 +93,7 @@ registerLocaleData(localeEs)
     DataViewModule,
     CarouselModule,
     SkeletonModule,
+    FullCalendarModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
