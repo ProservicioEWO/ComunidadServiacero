@@ -27,7 +27,6 @@ export class Programas implements OnInit {
         this.cityGroups$ = this.api.getProgramsBySection(this.sectionId)
           .pipe(
             map(arr => {
-              console.log(arr)
               return _(arr)
               .groupBy("city.name")
               .map<CityGroup>((programs, name) => ({ name, programs}))
