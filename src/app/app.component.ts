@@ -37,7 +37,6 @@ export class AppComponent {
   }
 
   protected getModuleId(url: string, get: (moduleId: string) => Promise<void> | void) {
-    console.log(url)
     switch (true) {
       case /^\/instalaciones/.test(url):
         return get(ModuleId.INSTALACIONES)
