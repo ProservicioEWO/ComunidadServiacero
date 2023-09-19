@@ -24,6 +24,7 @@ export class Calendario implements OnInit {
 
   options: CalendarOptions = {
     initialView: 'dayGridMonth',
+    displayEventTime: false,
     locale: 'es-MX',
     buttonText: {
       today: 'Hoy'
@@ -69,10 +70,10 @@ export class Calendario implements OnInit {
                 color: e.color
               } :
               {
-                title: e.shortName,
-                start: this.tiempo(new Date(e.date)),
-                end: this.tiempo(new Date(e.end)),
-                color: e.color
+                  title: e.shortName,
+                  start: this.tiempo(new Date(e.date)),
+                  end: this.tiempo(new Date(e.end)),
+                  color: e.color
               }
           ))
           this.newEvents = calEvnts
