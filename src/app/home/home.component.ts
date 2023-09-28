@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CheckSessionService } from '../services/check-session.service';
-import { Subject, takeUntil } from 'rxjs';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SessionStatus } from '../utils/SessionStatus';
 
 @Component({
@@ -9,22 +8,30 @@ import { SessionStatus } from '../utils/SessionStatus';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  $destroy = new Subject()
+export class HomeComponent implements OnInit, OnDestroy {
+  checkSessionSubscription: Subscription
 
-  constructor(private checkSession: CheckSessionService, private router: Router) { }
+  modalVisible = false
+
+  constructor(private checkSession: CheckSessionService) { }
 
   ngOnInit(): void {
-    this.checkSession.run()
-      .pipe(
-        takeUntil(this.$destroy)
-      ).subscribe({
+    this.checkSessionSubscription = this.checkSession.run()
+      .subscribe({
         next: (status) => {
           if (status === SessionStatus.INVALID_SESSION) {
-            this.router.navigate(["/login"])
+            this.modalVisible = true
           }
         },
         error: console.log
       })
+  }
+
+  handleModalClick() {
+    window.location.reload()
+  }
+
+  ngOnDestroy() {
+    this.checkSessionSubscription.unsubscribe()
   }
 }

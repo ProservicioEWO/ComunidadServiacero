@@ -1,2 +1,11 @@
 <router-outlet></router-outlet>
+<p-dialog header="Inicie sesión de nuevo" [(visible)]="modalVisible" [modal]="true" [closable]="false" [draggable]="false">
+  <p class="m-0">
+    Tu sesión ha expirado. Por favor, vuelve a iniciar sesión para continuar disfrutando de nuestros servicios y
+    recursos. Gracias por tu comprensión.
+  </p>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="handleModalClick()" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
 <app-footer></app-footer>
