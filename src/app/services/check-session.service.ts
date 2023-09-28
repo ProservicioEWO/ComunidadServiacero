@@ -24,7 +24,9 @@ export class CheckSessionService {
       setInterval(async () => {
         try {
           if (this.expire) {
-            console.log(this.expire)
+            if(this.expire <= this.getUNIX) {
+              this.auth.logout()
+            }
             observer.next(
               this.expire <= this.getUNIX ?
                 SessionStatus.INVALID_SESSION :
