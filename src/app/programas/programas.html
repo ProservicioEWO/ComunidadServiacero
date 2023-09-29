@@ -80,22 +80,34 @@
         <p-progressSpinner></p-progressSpinner>
       </div>
     </ng-template>
-    <p-accordion *ngIf="this.cityGroups$ | async; let cityGroups; else programsLoading" [activeIndex]="0"
-      [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
-      <p-accordionTab *ngFor="let cityGroup of cityGroups" [header]="cityGroup.name">
-        <div class="row row-cols-2">
-          <div *ngFor="let program of cityGroup.programs" class="col mb-3">
-            <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
-              routerLinkActive="active" class="text-decoration-none text-black p-2">
-              <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
-                [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
-              {{program.shortName}}
-            </a>
-          </div>
-        </div>
-      </p-accordionTab>
-    </p-accordion>
 
+      <!--Modificaciones de Oscar-->
+    <ng-container *ngIf="(this.cityGroups$ | async) as cityGroups; else programsLoading">
+      <p-accordion *ngIf="cityGroups && cityGroups.length > 0; else noDataTemplate" [activeIndex]="0"
+        [(activeIndex)]="this.currentTabIndex" (activeIndexChange)="handleChangeIndex($event)">
+        <p-accordionTab *ngFor="let cityGroup of cityGroups" [header]="cityGroup.name">
+          <div class="row row-cols-2">
+            <div *ngFor="let program of cityGroup.programs" class="col mb-3">
+              <a [routerLink]="['/programas', this.sectionId, program.id]" [queryParams]="{index: this.currentTabIndex}"
+                routerLinkActive="active" class="text-decoration-none text-black p-2">
+                <p-badge [value]="program.type == 'e' ? 'externo':'interno'"
+                  [severity]="program.type == 'e' ? 'warning':'success'"></p-badge>
+                {{program.shortName}}
+              </a>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </ng-container>
+      <!--Modificaciones de Oscar-->
+
+    <!--Modificaciones de Oscar-->
+    <ng-template #noDataTemplate>
+      <div class="vstack align-items-center mt-5">
+        <p class="text-black fw-bold">Por el momento no hay información disponible para esta sección.</p>
+      </div>
+    </ng-template>
+    <!--Modificaciones de Oscar-->
     <router-outlet *ngIf="this.cityGroups$ | async"></router-outlet>
 
   </div>

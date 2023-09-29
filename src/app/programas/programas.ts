@@ -26,12 +26,16 @@ export class Programas implements OnInit {
       if (this.sectionId) {
         this.cityGroups$ = this.api.getProgramsBySection(this.sectionId)
           .pipe(
-            map(arr => {
-              return _(arr)
-              .groupBy("city.name")
-              .map<CityGroup>((programs, name) => ({ name, programs}))
-              .orderBy(cityGroups => cityGroups.name)
-              .value()
+            map(arr  => {
+              if(arr.length > 0){
+                return _(arr)
+                .groupBy("city.name")
+                .map<CityGroup>((programs, name) => ({ name, programs}))
+                .orderBy(cityGroups => cityGroups.name)
+                .value()
+              }else{
+                return []
+              }
             })
           )
       }
