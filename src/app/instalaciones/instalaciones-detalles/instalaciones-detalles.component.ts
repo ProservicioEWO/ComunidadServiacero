@@ -4,7 +4,7 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { data } from 'jquery';
-import { Observable, Subject, forkJoin, map, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, forkJoin, lastValueFrom, map, switchMap, takeUntil } from 'rxjs';
 import { Location } from 'src/app/models';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -31,13 +31,14 @@ export class InstalacionesDetalles implements OnInit {
           this.locations$ = this.api.getLocationsBySite(siteId).pipe(
             switchMap(arr => (
               forkJoin(
-                arr.map<Observable<NLocation>>(
-                  e => this.s3.getObject(e.imageKey).pipe(
-                    map(imageUrl => ({
+                arr.map<Promise<NLocation>>(
+                  async e => {
+                    const img = await lastValueFrom(await this.s3.getObject(e.imageKey))
+                    return {
                       ...e,
-                      imageUrl
-                    }))
-                  )
+                      imageUrl: img
+                    }
+                  }
                 )
               )
             ))
