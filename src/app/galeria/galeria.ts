@@ -11,17 +11,16 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./galeria.css'],
 })
 export class Galeria {
-  private unsubscribe$ = new Subject<void>()
 
   video$: Observable<string>
   events$: Observable<Event[]>
 
-  constructor(private api: ApiService, private s3: S3Service, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: ApiService, private s3: S3Service) { }
 
   ngOnInit() {
-    this.events$ = this.api.getEvents()
-    this.video$ = this.s3.getObject('videos/ComunidaServiacero_General.mp4')
-
-    
+    (async () => {
+      this.events$ = this.api.getEvents()
+      this.video$ = await this.s3.getObject('videos/ComunidaServiacero_General.mp4')
+    })()
   }
 }

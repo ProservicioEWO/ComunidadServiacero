@@ -11,12 +11,11 @@ export class GalleryComponent implements OnInit {
 
   images$: Observable<string[]>
 
-  arra: any[] = []
-
   constructor(private s3: S3Service) {}
   
   ngOnInit() {
-    this.images$ = this.s3.getObjects('images/banner/')
+    (async () => {
+      this.images$ = await this.s3.getObjects('images/banner/')
+    })()
   }
-
 }

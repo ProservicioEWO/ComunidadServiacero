@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
   forkJoin,
+  lastValueFrom,
   map,
   Observable,
   switchMap
@@ -28,13 +29,14 @@ export class NewsListComponent implements OnInit {
     this.news$ = this.api.getLatestNews().pipe(
       switchMap(arr => (
         forkJoin(
-          arr.map<Observable<News>>(
-            e => this.s3.getObject(`images/news/${e.image}`).pipe(
-              map(imageUrl => ({
+          arr.map<Promise<News>>(
+            async e => {
+              const img = await lastValueFrom((await this.s3.getObject(`images/news/${e.image}`)))
+              return {
                 ...e,
-                image: imageUrl
-              }))
-            )
+                image: img
+              }
+            }
           )
         )
       ))

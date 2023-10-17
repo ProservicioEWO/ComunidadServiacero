@@ -15,10 +15,10 @@ export class GaleriaDetalles implements OnInit {
   constructor(private route: ActivatedRoute, private s3: S3Service) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(async params => {
       const eventId = params.get("variable")
       if (eventId) {
-        this.images$ = this.s3.getObjects(`images/gallery/${eventId}/`)
+        this.images$ = await this.s3.getObjects(`images/gallery/${eventId}/`)
       }
     })
   }
