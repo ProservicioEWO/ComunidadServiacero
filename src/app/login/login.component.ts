@@ -1,5 +1,6 @@
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -25,6 +26,7 @@ export class LoginComponent {
   constructor(
     public auth: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private api: ApiService,
     private messageServicer: MessageService
   ) {
@@ -32,6 +34,20 @@ export class LoginComponent {
       username: this.username,
       password: this.password
     })
+
+    this.route.queryParams.subscribe(params => {
+      const usr = params['usr'];
+      const pwd = params['pwd'];
+  
+      // Verifica si los parámetros de la URL están presentes y asigna valores
+      if (usr && pwd) {
+        this.username.setValue(usr);
+        this.password.setValue(pwd);
+        
+        this.login();
+      }
+    })
+
   }
 
   async login() {
